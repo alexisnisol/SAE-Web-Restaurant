@@ -1,11 +1,12 @@
 <?php
-$jsonFile = './data/restaurants_orleans.json';
+$path = ROOT . '/static/data/';
+$jsonFile = $path . './restaurants_orleans.json';
 $data = json_decode(file_get_contents($jsonFile), true);
 
 // Open CSV files
-$restaurantCsv = fopen('./data/RESTAURANT.csv', 'w');
-$typeCuisineCsv = fopen('./data/TYPE_CUISINE.csv', 'w');
-$faireCuisineCsv = fopen('./data/FAIRE_CUISINE.csv', 'w');
+$restaurantCsv = fopen($path . 'RESTAURANT.csv', 'w');
+$typeCuisineCsv = fopen($path . 'TYPE_CUISINE.csv', 'w');
+$faireCuisineCsv = fopen($path . 'FAIRE_CUISINE.csv', 'w');
 
 // Write headers
 fputcsv($restaurantCsv, ['id_restaurant', 'name', 'type', 'operator', 'brand', 'opening_hours', 'wheelchair', 'vegetarian', 'vegan', 'delivery', 'takeaway', 'internet_access', 'stars', 'capacity', 'drive_through', 'wikidata', 'brand_wikidata', 'siret', 'phone', 'website', 'facebook', 'smoking', 'com_insee', 'com_nom', 'region', 'code_region', 'departement', 'code_departement', 'commune', 'code_commune', 'latitude', 'longitude']);

@@ -1,5 +1,0 @@
-CREATE OR REPLACE TABLE test (
-  id INT64,
-  name STRING, 
-  fait BOOLEAN DEFAULT TRUE
-);
