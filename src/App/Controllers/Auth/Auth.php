@@ -14,25 +14,13 @@ class Auth
         return isset($_SESSION['user_id']);
     }
 
-    static function isInstructor(): bool
-    {
-        return isset($_SESSION['is_instructor']) && $_SESSION['is_instructor'];
-    }
-
-    static function isAdmin(): bool
-    {
-        return isset($_SESSION['is_admin']) && $_SESSION['is_admin'];
-    }
-
     static function getCurrentUser(): ?array
     {
         if (self::isUserLoggedIn()) {
             return [
                 'id' => $_SESSION['user_id'],
                 'name' => $_SESSION['user_name'],
-                'email' => $_SESSION['user_email'],
-                'is_instructor' => $_SESSION['is_instructor'],
-                'is_admin' => $_SESSION['is_admin']
+                'email' => $_SESSION['user_email']
             ];
         }
         return null;
@@ -51,30 +39,15 @@ class Auth
         }
     }
 
-    static function checkUserIsInstructor() {
-        self::checkUserLoggedIn();
-        
-        if(!self::isInstructor()) {
-            header('Location: /index.php');
-        }
-    }
-
-    static function checkUserIsAdmin() {
-        self::checkUserLoggedIn();
-        if(!self::isAdmin()) {
-            header('Location: /index.php');
-        }
-    }
-
     static function getUserById($id) {
-        $query = App::getApp()->getDB()->prepare('SELECT * FROM PERSONNE WHERE id_p = :id_p');
+        $query = App::getApp()->getDB()->prepare('SELECT * FROM UTILISATEUR WHERE id_utilisateur = :id_p');
         $query->execute(array(':id_p' => $id));
         $user = $query->fetch();
         return self::createUserObject($user);
     }
 
     static function getUserByEmail($email) {
-        $query = App::getApp()->getDB()->prepare('SELECT * FROM PERSONNE WHERE email = :email');
+        $query = App::getApp()->getDB()->prepare('SELECT * FROM UTILISATEUR WHERE email = :email');
         $query->execute(array(':email' => $email));
         $user = $query->fetch();
         return self::createUserObject($user);
@@ -84,11 +57,7 @@ class Auth
     {
         $userObj = null;
         if ($user) {
-            if (isset($user['salaire'])) {
-                $userObj = new Instructor($user['id_p'], $user['nom'], $user['prenom'], $user['adresse'], $user['email'], $user['telephone'], $user['niveau'], $user['poids'], $user['mdp'], $user['date_inscription'], $user['cotisation'], $user['admin'], $user['salaire'], $user['experience']);
-            } else {
-                $userObj = new User($user['id_p'], $user['nom'], $user['prenom'], $user['adresse'], $user['email'], $user['telephone'], $user['niveau'], $user['poids'], $user['mdp'], $user['date_inscription'], $user['cotisation'], $user['admin']);
-            }
+                $userObj = new User($user['id_utilisateur'], $user['nom'], $user['prenom'], $user['email'], $user['mdp'], $user['role']);
         }
         return $userObj;
     }

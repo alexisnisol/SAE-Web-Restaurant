@@ -9,11 +9,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $password = $_POST['password'];
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
-    $address = $_POST['address'];
-    $phone = $_POST['phone'];
-    $level = $_POST['level'];
-    $weight = $_POST['weight'];
-    $error = AuthForm::checkRegisterForm($email, $password, $firstName, $lastName, $address, $phone, $level, $weight);
+    $error = AuthForm::checkRegisterForm($email, $password, $firstName, $lastName);
 }
 
 ?>
