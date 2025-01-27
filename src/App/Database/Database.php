@@ -29,8 +29,8 @@ abstract class Database implements IDatabase
     }
 
     public function createDatabase() {
-        $this->execute(file_get_contents(ROOT . '/static/data/creaPon.sql'));
-        $this->execute(file_get_contents(ROOT . '/static/data/insPon.sql'));
+        // $this->execute(file_get_contents(ROOT . '/static/data/creaPon.sql'));
+        // $this->execute(file_get_contents(ROOT . '/static/data/insPon.sql'));
     }
 
     public function getAllProgrammedCourses() {
