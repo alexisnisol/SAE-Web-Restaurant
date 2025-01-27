@@ -12,14 +12,11 @@ class AuthForm {
 
         $error = '';
         if($user){
-            //verify password
             if(password_verify($password, $user->password)){
-                //TODO : store user in session instead of user_id (SESSION['user']['id'])
                 $_SESSION['user_id'] = $user->id;
                 $_SESSION['user_email'] = $user->email;
                 $_SESSION['user_name'] = $user->lastName;
-                $_SESSION['is_instructor'] = $user->isInstructor();
-                $_SESSION['is_admin'] = $user->isAdmin;
+                $_SESSION['role'] = $user->getRole();
                 header('Location: /');
             }else{
                 $error = 'Mot de passe incorrect';
@@ -31,13 +28,13 @@ class AuthForm {
         return $error;
     }
 
-    static function checkRegisterForm($email, $password, $firstName, $lastName, $address, $phone, $level, $weight): string
+    static function checkRegisterForm($email, $password, $firstName, $lastName): string
     {
         $user = Auth::getUserByEmail($email);
 
         $error = '';
         if(!$user){
-            $userObj = new User(NULL, $firstName, $lastName, $address, $email, $phone, $level, $weight, $password, null, 0);
+            $userObj = new User(null, $firstName, $lastName, $email, $password);
             $userObj->register();
 
             //redirect to login page
@@ -49,7 +46,7 @@ class AuthForm {
         return $error;
     }
 
-    static function checkUpdateForm($email, $password, $firstName, $lastName, $address, $phone, $level, $weight): string
+    static function checkUpdateForm($email, $password, $firstName, $lastName): string
     {
         $user = Auth::getCurrentUserObj();
 
@@ -57,11 +54,7 @@ class AuthForm {
         if($user){
             $user->firstName = $firstName;
             $user->lastName = $lastName;
-            $user->address = $address;
             $user->email = $email;
-            $user->phone = $phone;
-            $user->level = $level;
-            $user->weight = $weight;
             if($password){
                 $user->password = $password;
                 $user->hashPassword();
