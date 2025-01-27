@@ -1,58 +1,90 @@
-footer {
-    background-color: #001f3f;
-    color: #ffffff;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 2rem;
-    text-align: center;
-}
-
-footer .col1, footer .col2, footer .col3 {
-    flex: 1;
-    margin: 1rem;
-    min-width: 20%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-}
-
-footer h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-    text-align: center;
-    padding-bottom: 0.5rem;
-    width: fit-content;
-}
-
-footer .col1 img {
-    width: 20%;
-    max-width: 100%;
-    margin-top: 1rem;
-}
-
-footer ul {
-    list-style-type: none;
-    padding: 0;
+html, body {
+    height: 100%;          /* Assure que la hauteur est de 100% de la page */
     margin: 0;
+    display: flex;
+    flex-direction: column; /* Aligne le contenu verticalement */
 }
 
-footer ul li {
-    margin: 0.5rem 0;
-    font-size: 1rem;
-}
-footer p {
-    margin: 0.5rem 0;
-    font-size: 0.9rem;
+.content {
+    flex-grow: 1; /* Permet au contenu principal de prendre toute la hauteur disponible */
 }
 
-footer .horizontal {
-    flex-basis: 100%; 
-    margin-top: 2rem;
-    border-top: 0.1rem solid #ffffff;
-    padding-top: 1rem;
+footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    background-color: #f9f9f9;
+    padding: 20px 10px;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 1rem;
+    margin-top: auto; /* Pousse le footer en bas */
+    flex-wrap: wrap; /* Permet aux colonnes de se réorganiser sur plusieurs lignes si nécessaire */
+}
+
+.footer-logo img {
+    max-width: 100px;
+}
+
+.footer-column {
+    text-align: left;
+}
+
+.footer-column h3 {
+    color: #008000;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.footer-column ul li a:hover {
+    text-decoration: underline;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons .circle {
+    width: 30px;
+    height: 30px;
+    background-color: black;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-icons .circle img {
+    width: 22px;
+    height: 22px;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.social-icons .circle:hover img {
+    transform: scale(1.1);
+}
+
+.footer-bottom {
     text-align: center;
+    font-size: 12px;
+    color: #666;
+    margin-top: 20px;
+    width: 100%;
 }
