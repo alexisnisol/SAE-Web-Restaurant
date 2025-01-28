@@ -35,6 +35,7 @@ use App\Views\Flash;
             <ul class="nav-links">
                 <li><a href="./index.php?action=visualisation&idRestau=5">Découvrir</a></li>
                 <li><a href="#avis">Avis</a></li>
+                <li><a href="./index.php?action=carte">Carte</a></li>
                 <li><a href="#plus">Plus</a></li>
             </ul>
             <a href="./index.php?action=register"><button class="btn-se-connecter">Se connecter</button></a>

@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Initialisation de la carte et centrage sur la France
-    var map = L.map('map').setView([46.903354, 1.888334], 5); // France
+    let zoom = addresses.length > 1 ? 6 : 5;
+    var map = L.map('map').setView([46.903354, 1.888334], zoom); // France
 
     // Ajout des tuiles OpenStreetMap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -19,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 L.marker(latLng).addTo(map)
                     .bindPopup(
                         `<strong>${restaurant.name}</strong><br>      
-                        <button onclick="window.location.href='${location.detailUrl}'">Voir le détail</button>`
+                        <button class="name" onclick="window.location.href='${restaurant.detailUrl}'">Voir le détail</button>`
                     ); // Ajout d'une popup avec le nom et le bouton`);
                 }
             else {
