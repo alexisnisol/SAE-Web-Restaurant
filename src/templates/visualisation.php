@@ -18,7 +18,7 @@ $restaurant = $restaurant[0];
         <img src="#" alt="Image du restaurant">
         <div class="restaurant-info">
             <h2><?php echo $restaurant['name'] ?></h2>
-            <p><?php echo $restaurant['departement'] . ", " . $restaurant['region'] ?></p>
+            <p><?php echo $restaurant['departement'] . ", " . $restaurant['region'] . ", " . $restaurant['commune'] ?></p>
             <!-- <p>Département, commune, code_commune</p> -->
             <p>📞 <?php echo $restaurant['phone'] ?></p>
             <p>Types de cuisine ❤️</p>
@@ -62,3 +62,30 @@ $restaurant = $restaurant[0];
         <div id="map"></div>
     </div>
 </div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script> 
+<script src="./static/js/map.js"></script>
+
+<script>
+    let addresses = [
+        {
+            lat: <?php echo $restaurant['latitude'] ?>,   // Ajout de la latitude
+            lng: <?php echo $restaurant['longitude'] ?>,   // Ajout de la longitude
+            name: "<?php echo $restaurant['name'] ?>"
+        }
+    ];
+</script>
+
+<!-- <script>
+    var addresses = [
+        {% for point in points_de_collecte %}
+    {
+        lat: {{ point.latitude }},   // Ajout de la latitude
+        lng: {{ point.longitude }},   // Ajout de la longitude
+        name: "{{ point.nom_pt_collecte }}",
+        detailUrl: "{{ url_for('detaille', id=point.id_point_de_collecte) }}"
+    },
+    {% endfor %}
+    ];
+</script> -->
