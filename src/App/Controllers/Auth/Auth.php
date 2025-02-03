@@ -3,7 +3,6 @@
 namespace App\Controllers\Auth;
 
 use App;
-use App\Controllers\Auth\Users\Instructor;
 use App\Controllers\Auth\Users\User;
 
 class Auth

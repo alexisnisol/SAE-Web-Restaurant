@@ -39,7 +39,7 @@ class User {
 
     public function register(){
         $this->hashPassword();
-        $query = App::getApp()->getDB()->prepare('INSERT INTO PERSONNE (nom, prenom, email, mdp) VALUES (:nom, :prenom, :email, :mdp)');
+        $query = App::getApp()->getDB()->prepare('INSERT INTO UTILISATEUR (nom, prenom, email, mdp) VALUES (:nom, :prenom, :email, :mdp)');
         $query->execute(array(':nom' => $this->lastName, ':prenom' => $this->firstName, ':email' => $this->email, ':mdp' => $this->password));
     }
 
