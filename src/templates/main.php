@@ -26,16 +26,19 @@ use App\Views\Flash;
 
 <header>
         <nav class="navbar">
-            <div class="logo">
-                <img src="../static/images/logo.jpg" alt="Logo Taste&Tell">
-                <span>Taste&Tell</span>
-            </div>
+            <a href="./index.php?action=home">
+                <div class="logo">
+                    <img src="../static/images/logo.jpg" alt="Logo Taste&Tell">
+                    <span>Taste&Tell</span>
+                </div>
+            </a>
             <ul class="nav-links">
-                <li><a href="#decouvrir">Découvrir</a></li>
+                <li><a href="./index.php?action=visualisation&idRestau=5">Découvrir</a></li>
                 <li><a href="#avis">Avis</a></li>
+                <li><a href="./index.php?action=carte">Carte</a></li>
                 <li><a href="#plus">Plus</a></li>
             </ul>
-            <button class="btn-se-connecter">Se connecter</button>
+            <a href="./index.php?action=register"><button class="btn-se-connecter">Se connecter</button></a>
         </nav>
     </header>
 

@@ -1,0 +1,32 @@
+/* Carte */
+/* .map {
+    margin-top: 20px;
+    background-color: #f1f1f1;
+    padding: 15px;
+    border-radius: 5px;
+} */
+
+#map {
+    width: 100%;
+    height: 70vh;
+    background-color: #ccc;
+    border-radius: 5px;
+}
+
+.name {
+    font-weight: bold;
+    background-color: #34a26d;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    border-color: #34a26d;
+    display: inline-block;
+}
+
+.name:hover {
+    background-color: #288357;
+}
+
+strong {
+    font-size: medium;
+}
