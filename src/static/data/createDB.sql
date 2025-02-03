@@ -1,11 +1,24 @@
+DROP TABLE IF EXISTS UTILISATEUR;
 DROP TABLE IF EXISTS PROPOSER;
 DROP TABLE IF EXISTS RESTAURANT;
 DROP TABLE IF EXISTS TYPE_CUISINE;
+DROP TABLE IF EXISTS TYPE;
+DROP TABLE IF EXISTS FAIRE_TYPE;
 
-CREATE OR REPLACE TABLE RESTAURANT (
+
+CREATE TABLE UTILISATEUR (
+  id_utilisateur   INT NOT NULL,
+  nom              VARCHAR(42),
+  prenom           VARCHAR(42),
+  email            VARCHAR(100),
+  mdp              VARCHAR(64),
+  role             TEXT CHECK (role in ('CLIENT','MODERATEUR','ADMIN')) DEFAULT 'CLIENT',
+  PRIMARY KEY (id_utilisateur)
+);
+
+CREATE TABLE RESTAURANT (
     id_restaurant SERIAL PRIMARY KEY,
     name VARCHAR,
-    type VARCHAR,
     operator VARCHAR,
     brand VARCHAR,
     opening_hours VARCHAR,
@@ -37,12 +50,12 @@ CREATE OR REPLACE TABLE RESTAURANT (
     longitude DOUBLE PRECISION
 );
 
-CREATE OR REPLACE TABLE TYPE_CUISINE (
+CREATE TABLE TYPE_CUISINE (
     id_cuisine SERIAL PRIMARY KEY,
     cuisine VARCHAR NOT NULL
 );
 
-CREATE OR REPLACE TABLE PROPOSER (
+CREATE TABLE PROPOSER (
     id_restaurant INT NOT NULL,
     id_cuisine INT NOT NULL,
     PRIMARY KEY (id_restaurant, id_cuisine),
@@ -50,4 +63,15 @@ CREATE OR REPLACE TABLE PROPOSER (
     FOREIGN KEY (id_cuisine) REFERENCES TYPE_CUISINE(id_cuisine)
 );
 
+CREATE OR REPLACE TABLE TYPE (
+    id_type INT PRIMARY KEY,
+    type VARCHAR NOT NULL
+);
 
+CREATE OR REPLACE FAIRE_TYPE (
+    id_restaurant INT NOT NULL,
+    id_type INT NOT NULL,
+    PRIMARY KEY (id_restaurant, id_type),
+    FOREIGN KEY (id_restaurant) REFERENCES RESTAURANT(id_restaurant),
+    FOREIGN KEY (id_type) REFERENCES TYPE(id_type)
+);

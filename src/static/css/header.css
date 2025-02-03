@@ -22,6 +22,10 @@ header {
     align-items: center;
 }
 
+.navbar a {
+    text-decoration: none;
+}
+
 .logo {
     display: flex;
     align-items: center;

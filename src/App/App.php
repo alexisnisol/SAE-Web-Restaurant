@@ -3,6 +3,7 @@
 use Config\ConfigBD;
 use App\Database\MySQLDatabase;
 use App\Autoloader;
+use App\Database\SQLiteDatabase;
 
 class App {
 
@@ -28,7 +29,7 @@ class App {
 
     public function getDB() {
         if ($this->db === null) {
-            $this->db = new MySQLDatabase(ConfigBD::$DB_NAME, ConfigBD::$DB_USER, ConfigBD::$DB_PASSWORD, ConfigBD::$DB_HOST);
+            $this->db = new SQLiteDatabase(ConfigBD::$SQLITE_FILE);
             $this->db->loadContents();
         }
         return $this->db;

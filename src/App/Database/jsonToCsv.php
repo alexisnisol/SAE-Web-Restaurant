@@ -7,11 +7,15 @@ $data = json_decode(file_get_contents($jsonFile), true);
 $restaurantCsv = fopen($path . 'RESTAURANT.csv', 'w');
 $typeCuisineCsv = fopen($path . 'TYPE_CUISINE.csv', 'w');
 $faireCuisineCsv = fopen($path . 'FAIRE_CUISINE.csv', 'w');
+$typesRestaurantCsv = fopen($path . 'TYPE.csv', 'w');
+$faireTypeCsv = fopen($path . 'FAIRE_TYPE.csv', 'w');
 
 // Write headers
-fputcsv($restaurantCsv, ['id_restaurant', 'name', 'type', 'operator', 'brand', 'opening_hours', 'wheelchair', 'vegetarian', 'vegan', 'delivery', 'takeaway', 'internet_access', 'stars', 'capacity', 'drive_through', 'wikidata', 'brand_wikidata', 'siret', 'phone', 'website', 'facebook', 'smoking', 'com_insee', 'com_nom', 'region', 'code_region', 'departement', 'code_departement', 'commune', 'code_commune', 'latitude', 'longitude']);
+fputcsv($restaurantCsv, ['id_restaurant', 'name', 'operator', 'brand', 'opening_hours', 'wheelchair', 'vegetarian', 'vegan', 'delivery', 'takeaway', 'internet_access', 'stars', 'capacity', 'drive_through', 'wikidata', 'brand_wikidata', 'siret', 'phone', 'website', 'facebook', 'smoking', 'com_insee', 'com_nom', 'region', 'code_region', 'departement', 'code_departement', 'commune', 'code_commune', 'latitude', 'longitude']);
 fputcsv($typeCuisineCsv, ['id_cuisine', 'cuisine']);
 fputcsv($faireCuisineCsv, ['id_restaurant', 'id_cuisine']);
+fputcsv($typesRestaurantCsv, ['id_type', 'type']);
+fputcsv($faireTypeCsv, ['id_restaurant', 'id_type']);
 
 $cuisines = [];
 $types = [];
@@ -31,10 +35,16 @@ foreach ($data as $item) {
         }
     }
 
+    if (!empty($item['type'])) {
+        if (!in_array($item['type'], $types)) {
+            $types[] = $item['type'];
+        }
+    }
+
     $restaurants[] = [
         $id,
         $item['name'] ?? null,
-        $item['type'] ?? null,
+        // $item['type'] ?? null,
         $item['operator'] ?? null,
         $item['brand'] ?? null,
         $item['opening_hours'] ?? null,
@@ -75,6 +85,13 @@ foreach ($data as $item) {
         }
     }
 
+    if (!empty($item['type'])) {
+        $faireType[] = [
+            $id,
+            array_search($item['type'], $types)
+        ];
+    }
+
     $id++;
 }
 
@@ -90,9 +107,19 @@ foreach ($faireCuisine as $item) {
     fputcsv($faireCuisineCsv, $item);
 }
 
+foreach ($types as $index => $type) {
+    fputcsv($typesRestaurantCsv, [$index, $type]);
+}
+
+foreach ($faireType as $item) {
+    fputcsv($faireTypeCsv, $item);
+}
+
 fclose($restaurantCsv);
 fclose($typeCuisineCsv);
 fclose($faireCuisineCsv);
+fclose($typesRestaurantCsv);
+fclose($faireTypeCsv);
 
 function filter_boolean($value) {
     if ($value === 'yes' || $value === 'Oui') {

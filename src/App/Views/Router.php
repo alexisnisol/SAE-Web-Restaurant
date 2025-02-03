@@ -54,6 +54,16 @@ class Router
                 break;
             case 'logout':
                 self::render('auth/logout.php', 'Deconnexion', []);
+                break;
+            case 'visualisation':
+                self::render('visualisation.php', 'Visualisation', ['visualisation.css']);
+                break;
+            case 'carte':
+                self::render('carte.php', 'Carte', ['carte.css']);
+                break;
+            case 'jsonToCsv':
+                self::render('jsonToCsv.php', 'Conversion JSON to CSV', ['jsonToCsv.css']);
+                break;
             
             default:
                 self::render('404.php', 'Page introuvable', ['404.css']);
