@@ -49,6 +49,12 @@ span {
     width: 35vw;
 }
 
+.titre-restaurants {
+    font-size: 2rem;
+    padding-left: 2vw;
+    color: #333;
+}
+
 .search-container .location {
     display: flex;
     align-items: center;
@@ -96,6 +102,85 @@ span {
 }
 
 
+.restaurant-carousel {
+    position: relative;
+    width: 90%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.carousel-track-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease-in-out;
+}
+
+.restaurant-box {
+    flex: 0 0 calc(25% - 20px); /* 4 éléments par ligne */
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;  /* Change le curseur en main pour signaler que c'est cliquable */
+    position: relative;
+}
+
+.restaurant-box img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.restaurant-description {
+    padding: 15px;
+}
+
+.restaurant-description h2 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    color: #000;
+}
+
+.restaurant-description p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.carousel-btn {
+    position: absolute;
+    background-color: #2a9d8f;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    padding: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+.restaurant-box-link {
+    flex: 0 0 calc(25% - 20px); /* 4 éléments par ligne */
+    display: block;
+    text-decoration: none;  /* Pour enlever le soulignement du lien */
+}
 /* Responsive Design */
 @media (min-width: 768px) {
     .hero {
