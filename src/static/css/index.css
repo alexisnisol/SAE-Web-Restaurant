@@ -131,6 +131,7 @@ span {
     text-align: center;
     cursor: pointer;  /* Change le curseur en main pour signaler que c'est cliquable */
     position: relative;
+    height: 95%;
 }
 
 .restaurant-box img {
@@ -156,25 +157,26 @@ span {
 
 .carousel-btn {
     position: absolute;
-    background-color: #2a9d8f;
+    background-color: rgb(42, 157, 143);
     color: white;
-    border: none;
-    font-size: 1.5rem;
-    padding: 15px;
+    border: medium;
+    font-size: 1rem;
+    padding: 1vw;
     border-radius: 50%;
     cursor: pointer;
     z-index: 10;
     top: 50%;
     transform: translateY(-50%);
-    transition: all 0.3s ease;
-}
+    transition: 0.3s;
+    height: 14%;
+  }
 
 .prev-btn {
-    left: 10px;
+    left: 1rem
 }
 
 .next-btn {
-    right: 10px;
+    right: 1rem;
 }
 .restaurant-box-link {
     flex: 0 0 calc(25% - 20px); /* 4 éléments par ligne */
