@@ -127,3 +127,103 @@ main {
 strong {
     font-size: medium;
 }
+
+/* Section des restaurants */
+.section-restaurants {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f9f9f9;
+}
+
+.titre-restaurants {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.restaurant-carousel {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-track-container {
+    overflow: hidden;
+    width: 100%;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.restaurant-box {
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+.restaurant-box img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.restaurant-description {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.restaurant-description h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #17280b;
+}
+
+.restaurant-description p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.carousel-btn {
+    background-color: #333;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background-color: #1b3552;
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
