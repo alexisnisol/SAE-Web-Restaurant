@@ -26,6 +26,18 @@ class User {
         return $this->role;
     }
 
+    public function isAdmin(): bool {
+        return $this->role === Role::ADMIN;
+    }
+
+    public function isClient(): bool {
+        return $this->role === Role::CLIENT;
+    }
+
+    public function isModerator(): bool {
+        return $this->role === Role::MODERATOR;
+    }
+
     public function hashPassword(){
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
     }

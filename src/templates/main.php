@@ -42,9 +42,9 @@ use App\Views\Flash;
             if (Auth::isUserLoggedIn()) {
                 echo '<p>Bonjour, ' . Auth::getCurrentUser()->firstName . '</p>';
 
-//                if (Auth::isAdmin()) {
-//                    echo '<a href="index.php?action=dashboard">Dashboard</a>';
-//                }
+                if (Auth::getCurrentUser()->isAdmin()) {
+                    echo '<a href="index.php?action=dashboard" class="btn-se-connecter">Dashboard</a>';
+                }
 
                 echo '<a href="index.php?action=logout" class="btn-se-connecter">Déconnexion</a>';
             } else {
