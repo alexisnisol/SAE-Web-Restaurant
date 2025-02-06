@@ -9,14 +9,10 @@ class AuthForm {
     static function checkLoginForm($email, $password): string
     {
         $user = Auth::getUserByEmail($email);
-
         $error = '';
         if($user){
             if(password_verify($password, $user->password)){
-                $_SESSION['user_id'] = $user->id;
-                $_SESSION['user_email'] = $user->email;
-                $_SESSION['user_name'] = $user->lastName;
-                $_SESSION['role'] = $user->getRole();
+                Auth::setUserSession($user);
                 header('Location: /');
             }else{
                 $error = 'Mot de passe incorrect';
@@ -33,18 +29,19 @@ class AuthForm {
         $error = '';
 
         if ($password !== $password_check) {
-            $error = "Les mots de passe ne correspondent pas";
-            return $error;
+            return "Les mots de passe ne correspondent pas";
         }
 
-        //check regex password strength
-        if (!preg_match('/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$/', $password)) {
-            $error = "Le mot de passe doit contenir plus de 8, au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial";
-            return $error;
+        //check regex password strength :
+        // + de 8 caractères
+        // au moins une lettre majuscule
+        // au moins une lettre minuscule
+        // au moins un nombre
+        if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/', $password)) {
+            return "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, un nombre";
         }
 
         $user = Auth::getUserByEmail($email);
-
         
         if(!$user){
             $userObj = new User(null, $firstName, $lastName, $email, $password);
@@ -61,25 +58,27 @@ class AuthForm {
 
     static function checkUpdateForm($email, $password, $firstName, $lastName): string
     {
-        $user = Auth::getCurrentUserObj();
+        $user = Auth::getCurrentUser();
 
         $error = '';
-        if($user){
+        if ($user) {
             $user->firstName = $firstName;
             $user->lastName = $lastName;
             $user->email = $email;
-            if($password){
+            if ($password) {
+                if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/', $password)) {
+                    return "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, un nombre";
+                }
                 $user->password = $password;
                 $user->hashPassword();
             }
             $user->updateDatabase();
 
             //redirect to login page
-            header('Location: /index.php?action=planning');
-        }else{
+            header('Location: /index.php');
+        } else {
             $error = "Utilisateur non trouvé";
         }
-
         return $error;
     }
 }
