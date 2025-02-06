@@ -25,22 +25,35 @@ use App\Views\Flash;
 <body>
 
 <header>
-        <nav class="navbar">
-            <a href="./index.php?action=home">
-                <div class="logo">
-                    <img src="../static/images/logo.jpg" alt="Logo Taste&Tell">
-                    <span>Taste&Tell</span>
-                </div>
+    <nav class="navbar">
+
+        <div class="nav-left">
+            <a href="./index.php?action=home" class="logo">
+                <img src="./static/images/logo.jpg" alt="Logo Taste&Tell">
+                <span class="title">Taste&Tell</span>
             </a>
+        </div>
+
+        <div class="nav-center">
             <ul class="nav-links">
-                <li><a href="./index.php?action=visualisation&idRestau=5">Découvrir</a></li>
+                <li><a href="./index.php">Découvrir</a></li>
                 <li><a href="#avis">Vos Avis</a></li>
                 <li><a href="./index.php?action=carte">Carte</a></li>
                 <li><a href="#plus">Plus</a></li>
             </ul>
-            <a href="./index.php?action=register"><button class="btn-se-connecter">Se connecter</button></a>
-        </nav>
-    </header>
+        </div>
+
+        <div class="nav-right">
+            <a href="./index.php?action=register">
+                <button class="btn-se-connecter">Se connecter</button>
+            </a>
+            <a href="./index.php?action=profil">
+                <img class="class-img-profil" src="./static/images/icon-profile.png" alt="Profil">
+            </a>
+        </div>
+    </nav>
+</header>
+
 
 <main>
     <?php Flash::flash();?>

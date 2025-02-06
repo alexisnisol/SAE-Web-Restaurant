@@ -30,6 +30,11 @@ $restaurants2
     <img class="food-image" src="../static/images/plat.png" alt="Plat savoureux">
 </div>
 
+<?php
+$carousel = new RestauCarousel($restaurants);
+echo $carousel->render();
+?>
+
 <div class="avis-container">
     <div class="avis-section">
         <div class="avis-contenu">
@@ -65,8 +70,5 @@ $restaurants2
 </div>
 
 
-<?php
-$carousel = new RestauCarousel($restaurants);
-echo $carousel->render();
-?>
+
 

@@ -64,7 +64,9 @@ class Router
             case 'jsonToCsv':
                 self::render('jsonToCsv.php', 'Conversion JSON to CSV', ['jsonToCsv.css']);
                 break;
-            
+            case 'profil' :
+                self::render('auth/profil.php', 'Profil',['form.css']);
+                break;
             default:
                 self::render('404.php', 'Page introuvable', ['404.css']);
                 break;
