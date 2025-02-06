@@ -3,21 +3,14 @@
 namespace App\Controllers\Auth\Users;
 
 use App;
-
-
-enum Role {
-    case CLIENT;
-    case MODERATOR;
-    case ADMIN;
-}
+use App\Controllers\Auth\Auth;
 
 class User {
-
-    public int $id;
-    public string $firstName;
-    public string $lastName;
-    public string $email;
-    public string $password;
+    public $id;
+    public $firstName;
+    public $lastName;
+    public $email;
+    public $password;
     public Role $role;
 
     public function __construct($id, $firstName, $lastName, $email, $password, $role='CLIENT'){
@@ -26,7 +19,7 @@ class User {
         $this->lastName = $lastName;
         $this->email = $email;
         $this->password = $password;
-        $this->role = $role;
+        $this->role = Role::valueOf($role);
     }
 
     public function getRole(): Role {
@@ -39,8 +32,8 @@ class User {
 
     public function register(){
         $this->hashPassword();
-        $query = App::getApp()->getDB()->prepare('INSERT INTO UTILISATEUR (nom, prenom, email, mdp) VALUES (:nom, :prenom, :email, :mdp)');
-        $query->execute(array(':nom' => $this->lastName, ':prenom' => $this->firstName, ':email' => $this->email, ':mdp' => $this->password));
+        $query = App::getApp()->getDB()->prepare('INSERT INTO UTILISATEUR (id_utilisateur, nom, prenom, email, mdp) VALUES (:id, :nom, :prenom, :email, :mdp)');
+        $query->execute(array(':id' => Auth::getNextUserId(), ':nom' => $this->lastName, ':prenom' => $this->firstName, ':email' => $this->email, ':mdp' => $this->password));
     }
 
     public function updateDatabase() {
