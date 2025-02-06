@@ -28,11 +28,24 @@ class AuthForm {
         return $error;
     }
 
-    static function checkRegisterForm($email, $password, $firstName, $lastName): string
+    static function checkRegisterForm($email, $password, $password_check, $firstName, $lastName): string
     {
+        $error = '';
+
+        if ($password !== $password_check) {
+            $error = "Les mots de passe ne correspondent pas";
+            return $error;
+        }
+
+        //check regex password strength
+        if (!preg_match('/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$/', $password)) {
+            $error = "Le mot de passe doit contenir plus de 8, au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial";
+            return $error;
+        }
+
         $user = Auth::getUserByEmail($email);
 
-        $error = '';
+        
         if(!$user){
             $userObj = new User(null, $firstName, $lastName, $email, $password);
             $userObj->register();

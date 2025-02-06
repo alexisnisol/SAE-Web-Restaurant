@@ -38,7 +38,7 @@ use App\Views\Flash;
                 <li><a href="./index.php?action=carte">Carte</a></li>
                 <li><a href="#plus">Plus</a></li>
             </ul>
-            <a href="./index.php?action=register"><button class="btn-se-connecter">Se connecter</button></a>
+            <a href="./index.php?action=login"><button class="btn-se-connecter">Se connecter</button></a>
         </nav>
     </header>
 
