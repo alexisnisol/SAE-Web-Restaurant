@@ -14,7 +14,7 @@ class Restaurant {
 
     static function getRestaurant($id) {
         $query = App::getApp()->getDB()->prepare('SELECT * FROM RESTAURANT WHERE id_restaurant = :id');
-        $query->bindParam(':id', $idRestau);
+        $query->bindParam(':id', $id);
         $query->execute();
         return $query->fetchAll();
     }
