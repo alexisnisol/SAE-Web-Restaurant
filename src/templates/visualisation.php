@@ -89,7 +89,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
         <?php else : ?>
             <?php foreach ($les_avis as $avis) : ?>
                 <div class="review">
-                    <span class="name"><?php echo $avis["nom"] . " " . $avis["prenom"] ?></span> ⭐⭐⭐⭐⭐
+                    <span class="name"><?php echo $avis["nom"] . " " . $avis["prenom"] ?></span> 
+                    <?php for ($i = 0; $i < 5; $i++) {
+                        if ($avis["etoile"] > $i) {
+                            echo '⭐';
+                        } else {
+                            echo '☆';
+                        }
+                    }
+                    ?>
                     <p class="date">Posté le : <?php echo $avis["date_avis"] ?></p>
                     <p><?php echo $avis["avis"] ?></p>
                     <?php if (Auth::isUserLoggedIn() && Auth::getCurrentUser()->isAdmin()) : ?>
