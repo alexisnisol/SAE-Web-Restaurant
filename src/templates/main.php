@@ -32,6 +32,12 @@ use App\Views\Flash;
             <a href="./index.php?action=home" class="logo">
                 <img src="./static/images/logo.jpg" alt="Logo Taste&Tell">
                 <span class="title">Taste&Tell</span>
+        <nav class="navbar">
+            <a href="./index.php?action=home">
+                <div class="logo">
+                    <img src="./static/images/logo.jpg" alt="Logo Taste&Tell">
+                    <span>Taste&Tell</span>
+                </div>
             </a>
         </div>
 
@@ -69,6 +75,21 @@ use App\Views\Flash;
     </nav>
 </header>
 
+            <?php
+            if (Auth::isUserLoggedIn()) {
+                echo '<p>Bonjour, ' . Auth::getCurrentUser()->firstName . '</p>';
+
+                if (Auth::getCurrentUser()->isAdmin()) {
+                    echo '<a href="index.php?action=dashboard" class="btn-se-connecter">Dashboard</a>';
+                }
+
+                echo '<a href="index.php?action=logout" class="btn-se-connecter">Déconnexion</a>';
+            } else {
+                echo '<a href="./index.php?action=login" class="btn-se-connecter">Se connecter</></a>';
+            }
+            ?>
+        </nav>
+    </header>
 
 <main>
     <?php Flash::flash();?>

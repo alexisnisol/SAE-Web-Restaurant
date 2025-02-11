@@ -7,9 +7,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     //get post data
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $password_check = $_POST['password_check'];
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
-    $error = AuthForm::checkRegisterForm($email, $password, $firstName, $lastName);
+    $error = AuthForm::checkRegisterForm($email, $password, $password_check, $firstName, $lastName);
 }
 
 ?>
@@ -29,33 +30,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             </div>
             
             <div class="input-container">
-                <input type="text" placeholder="Adresse" name="address" required>
-            </div>
-            
-            <div class="input-container">
-                <input type="tel" placeholder="Numéro de téléphone" name="phone" maxlength="10" pattern="[0-9]{10}" required>
-            </div>
-            
-            <div class="input-row">
-                <div class="input-container">
-                    <select name="level" required>
-                        <option value="" disabled selected>Niveau</option>
-                        <option value="1">Débutant</option>
-                        <option value="2">Intermédiaire</option>
-                        <option value="3">Avancé</option>
-                    </select>
-                </div>
-                <div class="input-container">
-                    <input type="number" placeholder="Poids" min="10" max="50" name="weight" required>
-                </div>
-            </div>
-
-            <div class="input-container">
                 <input type="email" placeholder="Adresse mail" name="email" required>
             </div>
 
             <div class="input-container">
                 <input type="password" placeholder="Mot de passe" name="password" required>
+            </div>
+
+
+            <div class="input-container">
+                <input type="password" placeholder="Mot de passe" name="password_check" required>
             </div>
 
             <?php 
