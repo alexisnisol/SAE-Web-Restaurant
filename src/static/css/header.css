@@ -93,3 +93,86 @@ header {
     border-radius: 50%;
     cursor: pointer;
 }
+
+
+
+
+/* Menu latéral */
+.profile-menu {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100vh;
+    background: white;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+}
+
+/* Affichage du menu */
+.profile-menu.open {
+    right: 0;
+}
+
+/* Contenu du menu */
+.menu-content {
+    width: 100%;
+    text-align: center;
+}
+
+.top-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.top-menu p {
+    margin: 0;
+    font-size: 18px;
+    color: black;
+}
+
+.top-menu .class-logo-profil {
+    width: 20%; 
+    height: auto;
+}
+
+.menu-content a {
+    display: block;
+    padding: 15px;
+    font-size: 16px;
+    text-decoration: none;
+    color: black;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.menu-content button {
+    background: rgb(255, 255, 255);
+    color: red;
+    border: none;
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+
+.menu-content button:hover {
+    color: darkred;
+}
+
+.close-menu {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+}

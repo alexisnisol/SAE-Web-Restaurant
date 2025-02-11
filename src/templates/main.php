@@ -11,6 +11,7 @@ use App\Views\Flash;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/ce811b00f8.js" crossorigin="anonymous"></script>
+    <script src="./static/js/menu_profil.js"></script>
     <link rel="stylesheet" href="./static/css/header.css">
     <link rel="stylesheet" href="./static/css/footer.css">
     <?php
@@ -47,10 +48,24 @@ use App\Views\Flash;
             <a href="./index.php?action=register">
                 <button class="btn-se-connecter">Se connecter</button>
             </a>
-            <a href="./index.php?action=profil">
-                <img class="class-img-profil" src="./static/images/icon-profile.png" alt="Profil">
+            <a>
+            <img id="profile-icon" class="class-img-profil" src="./static/images/icon-profile.png" alt="Profil">
             </a>
         </div>
+
+        <!-- Menu -->
+        <div id="profile-menu" class="profile-menu">
+            <div class="menu-content">
+            <div id="close-menu" class="close-menu">&times;</div>
+            <div class="top-menu">
+            <p>Mon Profil</p>
+                <img class="class-logo-profil" src="./static/images/icon-profile.png" alt="Profil">
+            </div>
+                <a href="./index.php?action=profil">Gérer mon Profil</a>
+                <button id="logout-btn">Déconnexion</button>
+            </div>
+        </div>
+
     </nav>
 </header>
 
