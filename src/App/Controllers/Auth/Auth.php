@@ -45,6 +45,12 @@ class Auth
         return $result['max_id'] + 1;
     }
 
+    static function getNextAvisId() {
+        $query = App::getApp()->getDB()->query('SELECT MAX(id_avis) as max_id FROM AVIS');
+        $result = $query->fetch();
+        return $result['max_id'] + 1;
+    }
+
     static function getUserById($id) {
         $query = App::getApp()->getDB()->prepare('SELECT * FROM UTILISATEUR WHERE id_utilisateur = :id_p');
         $query->execute(array(':id_p' => $id));

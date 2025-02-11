@@ -12,6 +12,26 @@ $restaurant = $restaurant[0];
 // echo $restaurant['name'];
 // print_r($restaurant);
 
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
+    $avisText = $_POST['review'];
+    $avisEtoiles = $_POST['rate'];
+    $userId = Auth::getCurrentUser()->id;
+    
+    if (!empty($avisText)) {
+        $insertQuery = App::getApp()->getDB()->prepare('INSERT INTO AVIS (id_avis, id_utilisateur, id_restaurant, etoile, avis) VALUES (:idAvis, :userId, :idRestau, :etoile, :avis)');
+        $insertQuery->bindParam(':idAvis', Auth::getNextAvisId());
+        $insertQuery->bindParam(':userId', $userId);
+        $insertQuery->bindParam(':idRestau', $idRestau);
+        $insertQuery->bindParam(':etoile', $avisEtoiles);
+        $insertQuery->bindParam(':avis', $avisText);
+        $insertQuery->execute();
+
+        header("Location: " . $_SERVER['REQUEST_URI']);
+        exit;
+    } 
+}
+
 ?>
 <div class="container">
     <!-- En-tête du restaurant -->
@@ -24,6 +44,7 @@ $restaurant = $restaurant[0];
             <p>📞 <?php echo $restaurant['phone'] ?></p>
             <p>Types de cuisine ❤️</p>
             <!-- <p>Note Moyenne du restaurant : <span class="rating">4.5 ⭐</span></p> -->
+            <p><?php echo Auth::getCurrentUser()->id_utilisateur ?></p>
         </div>
     </div>
 
@@ -31,6 +52,18 @@ $restaurant = $restaurant[0];
         <!-- Formulaire d'avis -->
         <form action="" method="post" class="review-form">
             <label for="review">Votre avis :</label>
+            <div class="rating">
+                <input value="5" name="rate" id="star5" type="radio">
+                <label title="text" for="star5"></label>
+                <input value="4" name="rate" id="star4" type="radio">
+                <label title="text" for="star4"></label>
+                <input value="3" name="rate" id="star3" type="radio" checked="">
+                <label title="text" for="star3"></label>
+                <input value="2" name="rate" id="star2" type="radio">
+                <label title="text" for="star2"></label>
+                <input value="1" name="rate" id="star1" type="radio">
+                <label title="text" for="star1"></label>
+            </div>
             <textarea name="review" id="review" cols="30" rows="10"></textarea>
             <input type="submit" value="Envoyer">
         </form>
