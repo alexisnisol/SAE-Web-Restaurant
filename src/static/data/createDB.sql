@@ -77,13 +77,15 @@ CREATE TABLE FAIRE_TYPE (
 );
 
 CREATE TABLE AVIS (
-    id_avis         INT NOT NULL,
+    id_avis         INT NOT NULL, 
     id_utilisateur  INT NOT NULL,
+    id_restaurant   INT NOT NULL,
     etoile          INT CHECK (etoile >= 0 AND etoile <= 5),
     avis            VARCHAR(200),
     date_avis       DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id_avis),
-    FOREIGN KEY (id_utilisateur) REFERENCES UTILISATEUR(id_utilisateur)
+    FOREIGN KEY (id_utilisateur) REFERENCES UTILISATEUR(id_utilisateur), 
+    FOREIGN KEY (id_restaurant) REFERENCES RESTAURANT(id_restaurant)
 );
 
 
