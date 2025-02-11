@@ -2,14 +2,9 @@
 
 use App\Controllers\Carousel\RestauCarousel;
 
-$query = App::getApp()->getDB()->prepare('SELECT id_restaurant,name,type, phone, opening_hours, commune FROM RESTAURANT');
+$query = App::getApp()->getDB()->prepare('SELECT id_restaurant,name,type, phone, opening_hours, commune FROM RESTAURANT NATURAL JOIN FAIRE_TYPE natural join TYPE');
 $query->execute();
 $restaurants = $query->fetchAll();
-
-$restaurants2
-
-
-
 ?>
 
 
