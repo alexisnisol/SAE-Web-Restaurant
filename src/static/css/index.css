@@ -1,8 +1,5 @@
 /* Style pour la page d'accueil */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
     background-color: #f3f3f3;
 }
 
@@ -19,7 +16,7 @@ body {
     margin: 50px auto;
     max-width: 90%;
     position: relative;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 
@@ -32,12 +29,6 @@ body {
     margin-bottom: 20px;
     line-height: 1.2;
 }
-
-span {
-    color: #000;
-    margin-right: 10px;
-}
-
 
 .search-container {
     display: flex;

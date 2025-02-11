@@ -28,7 +28,7 @@ use App\Views\Flash;
         <nav class="navbar">
             <a href="./index.php?action=home">
                 <div class="logo">
-                    <img src="../static/images/logo.jpg" alt="Logo Taste&Tell">
+                    <img src="./static/images/logo.jpg" alt="Logo Taste&Tell">
                     <span>Taste&Tell</span>
                 </div>
             </a>
@@ -38,7 +38,19 @@ use App\Views\Flash;
                 <li><a href="./index.php?action=carte">Carte</a></li>
                 <li><a href="#plus">Plus</a></li>
             </ul>
-            <a href="./index.php?action=register"><button class="btn-se-connecter">Se connecter</button></a>
+            <?php
+            if (Auth::isUserLoggedIn()) {
+                echo '<p>Bonjour, ' . Auth::getCurrentUser()->firstName . '</p>';
+
+                if (Auth::getCurrentUser()->isAdmin()) {
+                    echo '<a href="index.php?action=dashboard" class="btn-se-connecter">Dashboard</a>';
+                }
+
+                echo '<a href="index.php?action=logout" class="btn-se-connecter">Déconnexion</a>';
+            } else {
+                echo '<a href="./index.php?action=login" class="btn-se-connecter">Se connecter</></a>';
+            }
+            ?>
         </nav>
     </header>
 
