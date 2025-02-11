@@ -20,6 +20,7 @@ main {
     display: flex;
     align-items: center;
     gap: 20px;
+    margin-bottom: 30px;
 }
 
 .restaurant-header img {
@@ -48,6 +49,10 @@ main {
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 10px;
+}
+
+.no-review {
+    text-align: center;
 }
 
 .review .name {
