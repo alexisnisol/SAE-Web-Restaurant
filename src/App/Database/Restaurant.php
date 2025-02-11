@@ -24,5 +24,12 @@ class Restaurant {
         $query->execute();
         return $query->fetchAll();
     }
+
+    static function getTypeCuisineRestaurant($id) {
+        $query = App::getApp()->getDB()->prepare('SELECT * FROM PROPOSER NATURAL JOIN TYPE_CUISINE WHERE id_restaurant = :id');
+        $query->bindParam(':id', $id);
+        $query->execute();
+        return $query->fetchAll();
+    }
 }
 

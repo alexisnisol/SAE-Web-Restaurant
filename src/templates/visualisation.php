@@ -32,13 +32,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
 <div class="container">
     <!-- En-tête du restaurant -->
     <div class="restaurant-header">
-        <img src="#" alt="Image du restaurant">
+        <img src="./static/images/plat-carousel<?php echo $imageIndex = rand(1, 6) ?>.jpeg" alt="Image du restaurant">
         <div class="restaurant-info">
             <h2><?php echo $restaurant['name'] ?></h2>
-            <p><?php echo $restaurant['departement'] . ", " . $restaurant['region'] . ", " . $restaurant['commune'] ?></p>
-            <!-- <p>Département, commune, code_commune</p> -->
-            <p>📞 <?php echo $restaurant['phone'] ?></p>
-            <p>Types de cuisine ❤️</p>
+            <p><strong>Lieu : </strong><?php echo $restaurant['region'] . ", " . $restaurant['departement'] . ", " . $restaurant['commune'] ?></p>
+            <?php 
+                if (! empty($restaurant['brand'])) {
+                    echo "<p><strong>Marque : </strong>" . $restaurant['brand'] . "</p>";
+                }
+                if (! empty($restaurant['opening_hours'])) {
+                    echo "<p><strong>Horaires : </strong>" . $restaurant['opening_hours'] . "</p>";
+                }
+                if (! empty($restaurant['phone'])) {
+                    echo "<p><strong>Tel : </strong>📞 " . $restaurant['phone'] . "</p>";
+                }
+                if (! empty($restaurant['wheelchair']) || ! empty($restaurant['vegetarian']) || ! empty($restaurant['vegan']) || ! empty($restaurant['delivery']) || ! empty($restaurant['takeaway']) || ! empty($restaurant['internet_access']) || ! empty($restaurant['drive_through'])) {
+                    echo "<div class='cuisines'><p><strong>Services : </strong></p><ul>";
+                    if (! empty($restaurant['wheelchair'])) {
+                        echo "<li>Accès fauteuil roulant</li>";
+                    }
+                    if (! empty($restaurant['vegetarian'])) {
+                        echo "<li>Options végétariennes</li>";
+                    }
+                    if (! empty($restaurant['vegan'])) {
+                        echo "<li>Options véganes</li>";
+                    }
+                    if (! empty($restaurant['delivery'])) {
+                        echo "<li>Livraison</li>";
+                    }
+                    if (! empty($restaurant['takeaway'])) {
+                        echo "<li>À emporter</li>";
+                    }
+                    if (! empty($restaurant['internet_access'])) {
+                        echo "<li>Accès internet</li>";
+                    }
+                    if (! empty($restaurant['drive_through'])) {
+                        echo "<li>Drive-through</li>";
+                    }
+                    echo "</ul></div>";
+                }
+                $typeCuisines = Restaurant::getTypeCuisineRestaurant($idRestau);
+                if (! empty($typeCuisines)) {
+                    echo "<div class='cuisines'><p><strong>Types de cuisine ❤️ : </strong></p>";
+                    echo "<ul>";
+                        foreach ($typeCuisines as $cuisine) {
+                            echo "<li>" . $cuisine["cuisine"] . "</li>";
+                        }
+                    echo "</ul></div>";
+                }
+            ?>
             <!-- <p>Note Moyenne du restaurant : <span class="rating">4.5 ⭐</span></p> -->
             <p><?php echo Auth::getCurrentUser()->id_utilisateur ?></p>
         </div>
@@ -65,12 +107,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
             <textarea name="review" id="review" cols="30" rows="10" required></textarea>
             <input type="submit" value="Envoyer">
         </form>
-
-        <?php if (Auth::getCurrentUser()->isAdmin()) : ?>
-            <a href="index.php?action=dashboard" class="btn-se-connecter">Dashboard</a>
-        <?php endif; ?>
-
-        <a href="index.php?action=logout" class="btn-se-connecter">Déconnexion</a>
     <?php else : ?>
         <!-- Message de connexion -->
         <p class="login-message">Veuillez vous connecter pour laisser un avis...</p>
