@@ -58,6 +58,9 @@ class Router
             case 'visualisation':
                 self::render('visualisation.php', 'Visualisation', ['visualisation.css']);
                 break;
+            case 'a-propos':
+                self::render('a-propos.php', 'À propos', ['a-propos.css']);
+                break;
             case 'carte':
                 self::render('carte.php', 'Carte', ['carte.css']);
                 break;
