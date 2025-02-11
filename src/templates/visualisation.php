@@ -1,17 +1,12 @@
 <?php
 use App\Controllers\Auth\Auth;
+use App\Database\Avis;
+use App\Database\Restaurant;
 
 $idRestau = $_GET['idRestau'];
-$query = App::getApp()->getDB()->prepare('SELECT * FROM RESTAURANT WHERE id_restaurant = :id');
-$query->bindParam(':id', $idRestau);
-$query->execute();
-$restaurant = $query->fetchAll();
+$restaurant = Restaurant::getRestaurant($idRestau);
 
 $restaurant = $restaurant[0];
-
-// echo $restaurant['name'];
-// print_r($restaurant);
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
     $avisText = $_POST['review'];
@@ -19,14 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
     $userId = Auth::getCurrentUser()->id;
     
     if (!empty($avisText)) {
-        $insertQuery = App::getApp()->getDB()->prepare('INSERT INTO AVIS (id_avis, id_utilisateur, id_restaurant, etoile, avis) VALUES (:idAvis, :userId, :idRestau, :etoile, :avis)');
-        $insertQuery->bindParam(':idAvis', Auth::getNextAvisId());
-        $insertQuery->bindParam(':userId', $userId);
-        $insertQuery->bindParam(':idRestau', $idRestau);
-        $insertQuery->bindParam(':etoile', $avisEtoiles);
-        $insertQuery->bindParam(':avis', $avisText);
-        $insertQuery->execute();
-
+        Avis::insertAvis($userId, $idRestau, $avisEtoiles, $avisText);
+        
         header("Location: " . $_SERVER['REQUEST_URI']);
         exit;
     } 
@@ -51,20 +40,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
     <?php if (Auth::isUserLoggedIn()): ?>
         <!-- Formulaire d'avis -->
         <form action="" method="post" class="review-form">
-            <label for="review">Votre avis :</label>
-            <div class="rating">
-                <input value="5" name="rate" id="star5" type="radio">
-                <label title="text" for="star5"></label>
-                <input value="4" name="rate" id="star4" type="radio">
-                <label title="text" for="star4"></label>
-                <input value="3" name="rate" id="star3" type="radio" checked="">
-                <label title="text" for="star3"></label>
-                <input value="2" name="rate" id="star2" type="radio">
-                <label title="text" for="star2"></label>
-                <input value="1" name="rate" id="star1" type="radio">
-                <label title="text" for="star1"></label>
+            <div class="title">
+                <label for="review">Votre avis :</label>
+                <div class="rating">
+                    <input value="5" name="rate" id="star5" type="radio">
+                    <label title="text" for="star5"></label>
+                    <input value="4" name="rate" id="star4" type="radio">
+                    <label title="text" for="star4"></label>
+                    <input value="3" name="rate" id="star3" type="radio" checked="">
+                    <label title="text" for="star3"></label>
+                    <input value="2" name="rate" id="star2" type="radio">
+                    <label title="text" for="star2"></label>
+                    <input value="1" name="rate" id="star1" type="radio">
+                    <label title="text" for="star1"></label>
+                </div>
             </div>
-            <textarea name="review" id="review" cols="30" rows="10"></textarea>
+            <textarea name="review" id="review" cols="30" rows="10" required></textarea>
             <input type="submit" value="Envoyer">
         </form>
 
@@ -82,13 +73,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
     <div class="reviews">
         <h3>Les avis :</h3>
         <?php 
-            $query = App::getApp()->getDB()->prepare('SELECT * FROM AVIS NATURAL JOIN UTILISATEUR');
-            $query->execute();
-            $les_avis = $query->fetchAll();
+            $les_avis = Avis::getAvisUser($idRestau);
         ?>
         <?php if (empty($les_avis)) : ?>
                 <div class="review no-review">
-                    <p><?php $restaurant['name'] ?> n'as pas d'avis pour le moment. </p>
+                    <p><?php echo $restaurant['name'] ?> n'as pas d'avis pour le moment. </p>
                 </div>
         <?php else : ?>
             <?php foreach ($les_avis as $avis) : ?>
@@ -121,15 +110,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
     ];
 </script>
 
-<!-- <script>
-    var addresses = [
-        {% for point in points_de_collecte %}
-    {
-        lat: {{ point.latitude }},   // Ajout de la latitude
-        lng: {{ point.longitude }},   // Ajout de la longitude
-        name: "{{ point.nom_pt_collecte }}",
-        detailUrl: "{{ url_for('detaille', id=point.id_point_de_collecte) }}"
-    },
-    {% endfor %}
-    ];
-</script> -->
+
