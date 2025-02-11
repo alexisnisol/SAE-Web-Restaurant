@@ -53,7 +53,8 @@ class Router
                 self::render('auth/register.php', 'Inscription', ['form.css']);
                 break;
             case 'logout':
-                self::render('auth/logout.php', 'Deconnexion', []);
+                session_destroy();
+                header('Location: /index.php');
                 break;
             case 'visualisation':
                 self::render('visualisation.php', 'Visualisation', ['visualisation.css']);

@@ -16,6 +16,11 @@ header {
     width: 100%;
 }
 
+span {
+    color: #000;
+    margin-right: 10px;
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
