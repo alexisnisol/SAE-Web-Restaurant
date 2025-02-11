@@ -243,36 +243,55 @@ strong {
 .rating:not(:checked) > input {
     position: absolute;
     appearance: none;
-  }
-  
-  .rating:not(:checked) > label {
+}
+
+.rating:not(:checked) > label {
     float: right;
     cursor: pointer;
     font-size: 30px;
     color: #666;
-  }
-  
-  .rating:not(:checked) > label:before {
+}
+
+.rating:not(:checked) > label:before {
     content: '★';
-  }
-  
-  .rating > input:checked + label:hover,
-  .rating > input:checked + label:hover ~ label,
-  .rating > input:checked ~ label:hover,
-  .rating > input:checked ~ label:hover ~ label,
-  .rating > label:hover ~ input:checked ~ label {
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
     color: #e58e09;
-  }
-  
-  .rating:not(:checked) > label:hover,
-  .rating:not(:checked) > label:hover ~ label {
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
     color: #ff9e0b;
-  }
-  
-  .rating > input:checked ~ label {
+}
+
+.rating > input:checked ~ label {
     color: #ffa723;
-  }
+}
   
   
-  
+.delete-form {
+    display: inline;
+}
+
+.delete-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+.delete-btn:hover {
+    background-color: #cc0000;
+}
+
+
   

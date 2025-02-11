@@ -9,16 +9,23 @@ $restaurant = Restaurant::getRestaurant($idRestau);
 $restaurant = $restaurant[0];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
-    $avisText = $_POST['review'];
-    $avisEtoiles = $_POST['rate'];
-    $userId = Auth::getCurrentUser()->id;
-    
-    if (!empty($avisText)) {
-        Avis::insertAvis($userId, $idRestau, $avisEtoiles, $avisText);
+    if (isset($_POST['review']) && isset($_POST['rate'])) {
+        $avisText = $_POST['review'];
+        $avisEtoiles = $_POST['rate'];
+        $userId = Auth::getCurrentUser()->id;
         
+        if (!empty($avisText)) {
+            Avis::insertAvis($userId, $idRestau, $avisEtoiles, $avisText);
+            
+            header("Location: " . $_SERVER['REQUEST_URI']);
+            exit;
+        } 
+    } elseif (isset($_POST['delete_review'])) {
+        $idAvis = $_POST['delete_review'];
+        Avis::deleteAvis($idAvis);
         header("Location: " . $_SERVER['REQUEST_URI']);
         exit;
-    } 
+    }
 }
 
 ?>
@@ -85,6 +92,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
                     <span class="name"><?php echo $avis["nom"] . " " . $avis["prenom"] ?></span> ⭐⭐⭐⭐⭐
                     <p class="date">Posté le : <?php echo $avis["date_avis"] ?></p>
                     <p><?php echo $avis["avis"] ?></p>
+                    <?php if (Auth::isUserLoggedIn() && Auth::getCurrentUser()->isAdmin()) : ?>
+                        <form action="" method="post" class="delete-form">
+                            <input type="hidden" name="delete_review" value="<?php echo $avis['id_avis']; ?>">
+                            <button type="submit" class="delete-btn">🗑 Supprimer</button>
+                        </form>
+                    <?php endif ?>
                 </div>
             <?php endforeach ?>
         <?php endif ?>

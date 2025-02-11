@@ -28,5 +28,11 @@ class Avis {
         $query->execute();
         return $query->fetchAll();
     }
+
+    static function deleteAvis($idAvis) {
+        $query = App::getApp()->getDB()->prepare('DELETE FROM AVIS WHERE id_avis = :id');
+        $query->bindParam(':id', $idAvis);
+        $query->execute();
+    }
 }
 
