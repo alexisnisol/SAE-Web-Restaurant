@@ -11,6 +11,7 @@ use App\Views\Flash;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/ce811b00f8.js" crossorigin="anonymous"></script>
+    <script src="./static/js/menu_profil.js"></script>
     <link rel="stylesheet" href="./static/css/header.css">
     <link rel="stylesheet" href="./static/css/footer.css">
     <?php
@@ -25,6 +26,12 @@ use App\Views\Flash;
 <body>
 
 <header>
+    <nav class="navbar">
+
+        <div class="nav-left">
+            <a href="./index.php?action=home" class="logo">
+                <img src="./static/images/logo.jpg" alt="Logo Taste&Tell">
+                <span class="title">Taste&Tell</span>
         <nav class="navbar">
             <a href="./index.php?action=home">
                 <div class="logo">
@@ -32,12 +39,42 @@ use App\Views\Flash;
                     <span>Taste&Tell</span>
                 </div>
             </a>
+        </div>
+
+        <div class="nav-center">
             <ul class="nav-links">
-                <li><a href="./index.php?action=visualisation&idRestau=5">Découvrir</a></li>
-                <li><a href="#avis">Avis</a></li>
+                <li><a href="./index.php">Découvrir</a></li>
+                <li><a href="#avis">Vos Avis</a></li>
                 <li><a href="./index.php?action=carte">Carte</a></li>
                 <li><a href="#plus">Plus</a></li>
             </ul>
+        </div>
+
+        <div class="nav-right">
+            <a href="./index.php?action=register">
+                <button class="btn-se-connecter">Se connecter</button>
+            </a>
+            <a>
+            <img id="profile-icon" class="class-img-profil" src="./static/images/icon-profile.png" alt="Profil">
+            </a>
+        </div>
+
+        <!-- Menu -->
+        <div id="profile-menu" class="profile-menu">
+            <div class="menu-content">
+            <div id="close-menu" class="close-menu">&times;</div>
+            <div class="top-menu">
+            <p>Mon Profil</p>
+                <img class="class-logo-profil" src="./static/images/icon-profile.png" alt="Profil">
+            </div>
+                <a href="./index.php?action=profil">Gérer mon Profil</a>
+                <button id="logout-btn">Déconnexion</button>
+            </div>
+        </div>
+
+    </nav>
+</header>
+
             <?php
             if (Auth::isUserLoggedIn()) {
                 echo '<p>Bonjour, ' . Auth::getCurrentUser()->firstName . '</p>';
