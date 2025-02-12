@@ -54,7 +54,7 @@ use App\Views\Flash;
             <div class="menu-content">
                 <div id="close-menu" class="close-menu">&times;</div>
                 <div class="top-menu">
-                    <p>Mon Profil</p>
+                <p><?= Auth::getCurrentUser()->firstName ?></p>
                     <img class="class-logo-profil" src="./static/images/icon-profile.png" alt="Profil">
                 </div>
                 <a href="./index.php?action=profil">Gérer mon Profil</a>
