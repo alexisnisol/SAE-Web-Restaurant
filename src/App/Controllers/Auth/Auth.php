@@ -8,26 +8,27 @@ use App\Controllers\Auth\Users\User;
 class Auth
 {
 
-    static function isUserLoggedIn(): bool
+    public static function setUserSession(User $user): void
     {
-        return isset($_SESSION['user_id']);
+        $_SESSION['user'] = serialize($user);
     }
 
-    static function getCurrentUser(): ?array
+    static function isUserLoggedIn(): bool
+    {
+        return isset($_SESSION['user']);
+    }
+
+    static function getCurrentUser(): ?User
     {
         if (self::isUserLoggedIn()) {
-            return [
-                'id' => $_SESSION['user_id'],
-                'name' => $_SESSION['user_name'],
-                'email' => $_SESSION['user_email']
-            ];
+            return unserialize($_SESSION['user']);
         }
         return null;
     }
 
-    static function getCurrentUserObj() {
+    static function update() {
         if (self::isUserLoggedIn()) {
-            return self::getUserById($_SESSION['user_id']);
+            self::setUserSession(self::getUserById($_SESSION['user']->id));
         }
         return null;
     }
@@ -36,6 +37,12 @@ class Auth
         if(!self::isUserLoggedIn()){
             header('Location: /index.php');
         }
+    }
+
+    static function getNextUserId() {
+        $query = App::getApp()->getDB()->query('SELECT MAX(id_utilisateur) as max_id FROM UTILISATEUR');
+        $result = $query->fetch();
+        return $result['max_id'] + 1;
     }
 
     static function getUserById($id) {

@@ -27,7 +27,6 @@ use App\Views\Flash;
 
 <header>
     <nav class="navbar">
-
         <div class="nav-left">
             <a href="./index.php?action=home" class="logo">
                 <img src="./static/images/logo.jpg" alt="Logo Taste&Tell">
@@ -44,15 +43,6 @@ use App\Views\Flash;
             </ul>
         </div>
 
-        <div class="nav-right">
-            <a href="./index.php?action=register">
-                <button class="btn-se-connecter">Se connecter</button>
-            </a>
-            <a>
-            <img id="profile-icon" class="class-img-profil" src="./static/images/icon-profile.png" alt="Profil">
-            </a>
-        </div>
-
         <!-- Menu -->
         <div id="profile-menu" class="profile-menu">
             <div class="menu-content">
@@ -66,8 +56,26 @@ use App\Views\Flash;
             </div>
         </div>
 
-    </nav>
-</header>
+            <?php
+            if (Auth::isUserLoggedIn()) {
+                echo '<p>Bonjour, ' . Auth::getCurrentUser()->firstName . '</p>';
+
+                if (Auth::getCurrentUser()->isAdmin()) {
+                    echo '<a href="index.php?action=dashboard" class="btn-se-connecter">Dashboard</a>';
+                }
+
+                echo '<a href="index.php?action=logout" class="btn-se-connecter">Déconnexion</a>';
+            } else {
+                echo '<a href="./index.php?action=login" class="btn-se-connecter">Se connecter</></a>';
+            }
+            ?>
+            <div class="nav-right">
+                <a>
+                    <img id="profile-icon" class="class-img-profil" src="./static/images/icon-profile.png" alt="Profil">
+                </a>
+        </div>
+        </nav>
+    </header>
 
 
 <main>
