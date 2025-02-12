@@ -1,7 +1,7 @@
 <?php
 use App\Controllers\Auth\Auth;
-use App\Database\Avis;
-use App\Database\Restaurant;
+use App\Controllers\Avis\Avis;
+use App\Controllers\Restaurant\Restaurant;
 
 $idRestau = $_GET['idRestau'];
 $restaurant = Restaurant::getRestaurant($idRestau);

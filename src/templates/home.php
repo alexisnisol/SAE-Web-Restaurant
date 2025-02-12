@@ -1,7 +1,7 @@
 <?php
 
 use App\Controllers\Carousel\RestauCarousel;
-use App\Database\Restaurant;
+use App\Controllers\Restaurant\Restaurant;
 
 $restaurants = Restaurant::getRestaurantsNTType();
 ?>

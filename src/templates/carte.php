@@ -1,5 +1,5 @@
 <?php 
-use App\Database\Restaurant;
+use App\Controllers\Restaurant\Restaurant;
 
 $restaurant = Restaurant::getPosRestaurants();
 ?>
