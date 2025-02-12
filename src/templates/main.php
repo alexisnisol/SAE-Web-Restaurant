@@ -45,7 +45,9 @@ use App\Views\Flash;
                 <?php else : ?>
                     <a href="./index.php?action=login" class="btn-se-connecter">Se connecter</a>
                 <?php endif; ?>
-                <img id="profile-icon" class="class-img-profil" src="./static/images/icon-profile.png" alt="Profil">
+                <img id="profile-icon" class="class-img-profil" src="./static/images/icon-profile.png" alt="Profil"
+                data-logged-in="<?= Auth::isUserLoggedIn() ? 'true' : 'false' ?>">
+
             </div>
         </nav>
         <div id="profile-menu" class="profile-menu">
