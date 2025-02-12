@@ -46,7 +46,7 @@ use App\Views\Flash;
                 <li><a href="./index.php">Découvrir</a></li>
                 <li><a href="#avis">Vos Avis</a></li>
                 <li><a href="./index.php?action=carte">Carte</a></li>
-                <li><a href="#plus">Plus</a></li>
+                <li><a href="./index.php?action=a-propos">Plus</a></li>
             </ul>
         </div>
 
@@ -71,25 +71,21 @@ use App\Views\Flash;
                 <button id="logout-btn">Déconnexion</button>
             </div>
         </div>
+        <?php
+        if (Auth::isUserLoggedIn()) {
+            echo '<p>Bonjour, ' . Auth::getCurrentUser()->firstName . '</p>';
 
+            if (Auth::getCurrentUser()->isAdmin()) {
+                echo '<a href="index.php?action=dashboard" class="btn-se-connecter">Dashboard</a>';
+            }
+
+            echo '<a href="index.php?action=logout" class="btn-se-connecter">Déconnexion</a>';
+        } else {
+            echo '<a href="./index.php?action=login" class="btn-se-connecter">Se connecter</></a>';
+        }
+        ?>
     </nav>
 </header>
-
-            <?php
-            if (Auth::isUserLoggedIn()) {
-                echo '<p>Bonjour, ' . Auth::getCurrentUser()->firstName . '</p>';
-
-                if (Auth::getCurrentUser()->isAdmin()) {
-                    echo '<a href="index.php?action=dashboard" class="btn-se-connecter">Dashboard</a>';
-                }
-
-                echo '<a href="index.php?action=logout" class="btn-se-connecter">Déconnexion</a>';
-            } else {
-                echo '<a href="./index.php?action=login" class="btn-se-connecter">Se connecter</></a>';
-            }
-            ?>
-        </nav>
-    </header>
 
 <main>
     <?php Flash::flash();?>
@@ -103,7 +99,7 @@ use App\Views\Flash;
         <div class="footer-column">
             <h3>En savoir plus</h3>
             <ul>
-                <li><a href="#apropos">À propos</a></li>
+                <li><a href="./index.php?action=a-propos">À propos</a></li>
                 <li><a href="#sinscrire">S'inscrire</a></li>
                 <li><a href="#restaurants">Restaurants à proximité</a></li>
             </ul>
