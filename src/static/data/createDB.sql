@@ -88,4 +88,12 @@ CREATE TABLE AVIS (
     FOREIGN KEY (id_restaurant) REFERENCES RESTAURANT(id_restaurant)
 );
 
+CREATE TABLE CUISINE_AIME (
+    id_utilisateur  INT NOT NULL,
+    id_cuisine      INT NOT NULL,
+    PRIMARY KEY (id_utilisateur, id_cuisine), 
+    FOREIGN KEY (id_utilisateur) REFERENCES UTILISATEUR(id_utilisateur), 
+    FOREIGN KEY (id_cuisine) REFERENCES TYPE_CUISINE(id_cuisine)
+); 
+
 

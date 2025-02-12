@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
                     <?php if (Auth::isUserLoggedIn() && Auth::getCurrentUser()->isAdmin()) : ?>
                         <form action="" method="post" class="delete-form">
                             <input type="hidden" name="delete_review" value="<?php echo $avis['id_avis']; ?>">
-                            <button type="submit" class="delete-btn">🗑 Supprimer</button>
+                            <button type="submit" class="delete-btn" onclick="return confirm('Êtes-vous sûr de bien vouloir supprimer cet avis ?')">🗑 Supprimer</button>
                         </form>
                     <?php endif ?>
                 </div>
