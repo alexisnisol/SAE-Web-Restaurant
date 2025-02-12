@@ -2,6 +2,7 @@
 use App\Controllers\Auth\Auth;
 use App\Controllers\Avis\Avis;
 use App\Controllers\Restaurant\Restaurant;
+use App\Controllers\LikeCuisine\LikeCuisine;
 
 $idRestau = $_GET['idRestau'];
 $restaurant = Restaurant::getRestaurant($idRestau);
@@ -23,6 +24,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
     } elseif (isset($_POST['delete_review'])) {
         $idAvis = $_POST['delete_review'];
         Avis::deleteAvis($idAvis);
+        header("Location: " . $_SERVER['REQUEST_URI']);
+        exit;
+    } elseif (isset($_POST['like'])) {
+        $cuisine = $_POST['cuisine'];
+        $userId = Auth::getCurrentUser()->id;
+    
+        if (LikeCuisine::isCuisineLiked($userId, $cuisine)) {
+            LikeCuisine::unlikeCuisine($userId, $cuisine);
+        } else {
+            LikeCuisine::likeCuisine($userId, $cuisine);
+        }
         header("Location: " . $_SERVER['REQUEST_URI']);
         exit;
     }
@@ -76,7 +88,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
                     echo "<div class='cuisines'><p><strong>Types de cuisine ❤️ : </strong></p>";
                     echo "<ul>";
                         foreach ($typeCuisines as $cuisine) {
-                            echo "<li>" . $cuisine["cuisine"] . "</li>";
+                            // echo "<li>" . $cuisine["cuisine"] . "</li>";
+                            $isLiked = LikeCuisine::isCuisineLiked(Auth::getCurrentUser()->id, $cuisine["id_cuisine"]);
+                            echo "<li>";
+                            echo "<form action='' method='post'>";
+                            echo "<input type='hidden' name='cuisine' value='" . $cuisine["id_cuisine"] . "'>";
+                            echo "<button type='submit' name='like' style='background: none; border: none; cursor: pointer; font-size: 16px;'>";
+                            echo $cuisine["cuisine"] . " " . ($isLiked ? "❤️" : "♡");
+                            echo "</button>";
+                            echo "</form>";
+                            echo "</li>";
                         }
                     echo "</ul></div>";
                 }
