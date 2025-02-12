@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Initialisation de la carte et centrage sur la France
-    let zoom = addresses.length > 1 ? 6 : 5;
-    var map = L.map('map').setView([46.903354, 1.888334], zoom); // France
+    const France = {pos: [46.903354, 1.888334], zoom: 5};
+    const Orléans = {pos: [47.902964, 1.909251], zoom: 13};
+    let view = addresses.length > 1 ? Orléans : France;
+    var map = L.map('map').setView(view.pos, view.zoom); 
 
     // Ajout des tuiles OpenStreetMap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

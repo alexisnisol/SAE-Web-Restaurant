@@ -1,8 +1,7 @@
 <?php 
-$query = App::getApp()->getDB()->prepare('SELECT id_restaurant, name, latitude, longitude FROM RESTAURANT');
-$query->execute();
-$restaurant = $query->fetchAll();
+use App\Controllers\Restaurant\Restaurant;
 
+$restaurant = Restaurant::getPosRestaurants();
 ?>
 
 <div class="map">
