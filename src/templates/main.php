@@ -41,7 +41,7 @@ use App\Views\Flash;
                 <li><a href="./index.php?action=carte">Carte</a></li>
                 <li><a href="./index.php?action=a-propos">Plus</a></li>
             </ul>
-<<<<<<<<< Temporary merge branch 1
+
             <?php
             if (Auth::isUserLoggedIn()) {
                 echo '<p>Bonjour, ' . Auth::getCurrentUser()->firstName . '</p>';
@@ -55,9 +55,6 @@ use App\Views\Flash;
                 echo '<a href="./index.php?action=login" class="btn-se-connecter">Se connecter</></a>';
             }
             ?>
-        </nav>
-    </header>
-=========
         </div>
 
         <div class="nav-right">
@@ -86,9 +83,9 @@ use App\Views\Flash;
             if (Auth::isUserLoggedIn()) {
                 echo '<p>Bonjour, ' . Auth::getCurrentUser()->firstName . '</p>';
 
-                if (Auth::getCurrentUser()->isAdmin()) {
-                    echo '<a href="index.php?action=dashboard" class="btn-se-connecter">Dashboard</a>';
-                }
+            if (Auth::getCurrentUser()->isAdmin()) {
+                echo '<a href="index.php?action=dashboard" class="btn-se-connecter">Dashboard</a>';
+            }
 
                 echo '<a href="index.php?action=logout" class="btn-se-connecter">Déconnexion</a>';
             } else {
@@ -103,7 +100,7 @@ use App\Views\Flash;
         </nav>
     </header>
 
->>>>>>>>> Temporary merge branch 2
+
 
 <main>
     <?php Flash::flash();?>
