@@ -101,6 +101,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
                         }
                     echo "</ul></div>";
                 }
+                if (! empty($restaurant["website"])) {
+                    echo "<p><strong>Site web : </strong><a target='_blank' href='" . $restaurant['website']. "'>" . $restaurant['website'] . "<a/></p>";
+                }
             ?>
             <!-- <p>Note Moyenne du restaurant : <span class="rating">4.5 ⭐</span></p> -->
             <p><?php echo Auth::getCurrentUser()->id_utilisateur ?></p>

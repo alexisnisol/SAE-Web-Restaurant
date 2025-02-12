@@ -40,13 +40,15 @@ use App\Views\Flash;
             </ul>
             <?php
             if (Auth::isUserLoggedIn()) {
-                echo '<p>Bonjour, ' . Auth::getCurrentUser()->firstName . '</p>';
+                echo "<ul class=\"login\">";
+                echo '<li>Bonjour, ' . Auth::getCurrentUser()->firstName . '</li>';
 
                 if (Auth::getCurrentUser()->isAdmin()) {
-                    echo '<a href="index.php?action=dashboard" class="btn-se-connecter">Dashboard</a>';
+                    echo '<li><a href="index.php?action=dashboard" class="btn-se-connecter">Dashboard</a></li>';
                 }
 
-                echo '<a href="index.php?action=logout" class="btn-se-connecter">Déconnexion</a>';
+                echo '<li><a href="index.php?action=logout" class="btn-se-connecter">Déconnexion</a></li>';
+                echo "</ul>";
             } else {
                 echo '<a href="./index.php?action=login" class="btn-se-connecter">Se connecter</></a>';
             }

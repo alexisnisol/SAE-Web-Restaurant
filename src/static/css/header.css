@@ -46,8 +46,18 @@ span {
 .nav-links {
     display: flex;
     gap: 50px;
-    margin-right: 8rem;
+    /* margin-right: 8rem; */
+    margin: 0 20px;
     list-style: none;
+}
+
+.login {
+    display: flex;
+    gap: 10px;
+    /* margin-right: 8rem; */
+    margin: 0 20px;
+    list-style: none;
+    align-items: center;
 }
 
 .nav-links a {
