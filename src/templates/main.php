@@ -71,26 +71,21 @@ use App\Views\Flash;
                 <button id="logout-btn">Déconnexion</button>
             </div>
         </div>
+        <?php
+        if (Auth::isUserLoggedIn()) {
+            echo '<p>Bonjour, ' . Auth::getCurrentUser()->firstName . '</p>';
 
+            if (Auth::getCurrentUser()->isAdmin()) {
+                echo '<a href="index.php?action=dashboard" class="btn-se-connecter">Dashboard</a>';
+            }
+
+            echo '<a href="index.php?action=logout" class="btn-se-connecter">Déconnexion</a>';
+        } else {
+            echo '<a href="./index.php?action=login" class="btn-se-connecter">Se connecter</></a>';
+        }
+        ?>
     </nav>
 </header>
-
-=======
-            <?php
-            if (Auth::isUserLoggedIn()) {
-                echo '<p>Bonjour, ' . Auth::getCurrentUser()->firstName . '</p>';
-
-                if (Auth::getCurrentUser()->isAdmin()) {
-                    echo '<a href="index.php?action=dashboard" class="btn-se-connecter">Dashboard</a>';
-                }
-
-                echo '<a href="index.php?action=logout" class="btn-se-connecter">Déconnexion</a>';
-            } else {
-                echo '<a href="./index.php?action=login" class="btn-se-connecter">Se connecter</></a>';
-            }
-            ?>
-        </nav>
-    </header>
 
 <main>
     <?php Flash::flash();?>
