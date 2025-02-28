@@ -87,7 +87,7 @@ span {
 .nav-right {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px; /* Espacement entre le bouton et l'icône */
 }
 
 .btn-se-connecter {
@@ -97,11 +97,14 @@ span {
     padding: 10px 20px;
     border-radius: 20px;
     cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .btn-se-connecter:hover {
     background-color: #444;
 }
+
 
 .class-img-profil {
     width: 4rem;
@@ -169,7 +172,7 @@ span {
     border-bottom: 1px solid #ddd;
 }
 
-.menu-content button {
+.menu-content #logout-btn {
     background: rgb(255, 255, 255);
     color: red;
     border: none;
@@ -180,7 +183,7 @@ span {
     border-bottom: 1px solid #ddd;
 }
 
-.menu-content button:hover {
+.menu-content #logout-btn:hover {
     color: darkred;
 }
 

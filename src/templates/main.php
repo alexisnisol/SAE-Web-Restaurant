@@ -1,8 +1,6 @@
 <?php
-
 use App\Controllers\Auth\Auth;
 use App\Views\Flash;
-
 ?>
 
 <!DOCTYPE html>
@@ -14,87 +12,64 @@ use App\Views\Flash;
     <script src="./static/js/menu_profil.js"></script>
     <link rel="stylesheet" href="./static/css/header.css">
     <link rel="stylesheet" href="./static/css/footer.css">
-    <?php
-    if (!empty($cssFiles)) {
+    <?php if (!empty($cssFiles)) {
         foreach ($cssFiles as $cssFile) {
             echo '<link rel="stylesheet" href="./static/css/' . $cssFile . '">';
         }
-    }
-    ?>
-    <title><?php echo $title ?? null ?></title>
+    } ?>
+    <title><?= $title ?? 'Taste&Tell' ?></title>
 </head>
 <body>
-
-<header>
-    <nav class="navbar">
-
-        <div class="nav-left">
-            <a href="./index.php?action=home" class="logo">
-                <img src="./static/images/logo.jpg" alt="Logo Taste&Tell">
-                <span class="title">Taste&Tell</span>
+    <header>
         <nav class="navbar">
-            <a href="./index.php?action=home">
-                <div class="logo">
+            <div class="nav-left">
+                <a href="./index.php?action=home" class="logo">
                     <img src="./static/images/logo.jpg" alt="Logo Taste&Tell">
-                    <span>Taste&Tell</span>
-                </div>
-            </a>
-        </div>
+                    <span class="title">Taste&Tell</span>
+                </a>
+            </div>
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="./index.php">Découvrir</a></li>
+                    <li><a href="#avis">Vos Avis</a></li>
+                    <li><a href="./index.php?action=carte">Carte</a></li>
+                    <li><a href="./index.php?action=a-propos">Plus</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <?php if (Auth::isUserLoggedIn()) : ?>
+                    <p>Bonjour, <?= Auth::getCurrentUser()->firstName ?></p>
+                    <?php if (Auth::getCurrentUser()->isAdmin()) : ?>
+                        <a href="index.php?action=dashboard" class="btn-se-connecter">Dashboard</a>
+                    <?php endif; ?>
+                <?php else : ?>
+                    <a href="./index.php?action=login" class="btn-se-connecter">Se connecter</a>
+                <?php endif; ?>
+                <img id="profile-icon" class="class-img-profil" src="./static/images/icon-profile.png" alt="Profil"
+                data-logged-in="<?= Auth::isUserLoggedIn() ? 'true' : 'false' ?>">
 
-        <div class="nav-center">
-            <ul class="nav-links">
-                <li><a href="./index.php">Découvrir</a></li>
-                <li><a href="#avis">Vos Avis</a></li>
-                <li><a href="./index.php?action=carte">Carte</a></li>
-                <li><a href="./index.php?action=a-propos">Plus</a></li>
-            </ul>
-        </div>
-
-        <div class="nav-right">
-            <a href="./index.php?action=register">
-                <button class="btn-se-connecter">Se connecter</button>
-            </a>
-            <a>
-            <img id="profile-icon" class="class-img-profil" src="./static/images/icon-profile.png" alt="Profil">
-            </a>
-        </div>
-
-        <!-- Menu -->
+            </div>
+        </nav>
         <div id="profile-menu" class="profile-menu">
             <div class="menu-content">
-            <div id="close-menu" class="close-menu">&times;</div>
-            <div class="top-menu">
-            <p>Mon Profil</p>
-                <img class="class-logo-profil" src="./static/images/icon-profile.png" alt="Profil">
-            </div>
+                <div id="close-menu" class="close-menu">&times;</div>
+                <div class="top-menu">
+                <p><?= Auth::getCurrentUser()->firstName ?></p>
+                    <img class="class-logo-profil" src="./static/images/icon-profile.png" alt="Profil">
+                </div>
                 <a href="./index.php?action=profil">Gérer mon Profil</a>
-                <button id="logout-btn">Déconnexion</button>
+                <a href="index.php?action=logout" id="logout-btn">Déconnexion</a>
             </div>
         </div>
-        <?php
-            if (Auth::isUserLoggedIn()) {
-                echo "<ul class=\"login\">";
-                echo '<li>Bonjour, ' . Auth::getCurrentUser()->firstName . '</li>';
-
-                if (Auth::getCurrentUser()->isAdmin()) {
-                    echo '<li><a href="index.php?action=dashboard" class="btn-se-connecter">Dashboard</a></li>';
-                }
-
-                echo '<li><a href="index.php?action=logout" class="btn-se-connecter">Déconnexion</a></li>';
-                echo "</ul>";
-            } else {
-                echo '<a href="./index.php?action=login" class="btn-se-connecter">Se connecter</></a>';
-        }
-        ?>
     </nav>
 </header>
 
-<main>
-    <?php Flash::flash();?>
-    <?php echo $content ?? null ?>
-</main>
+    <main>
+        <?php Flash::flash(); ?>
+        <?= $content ?? '' ?>
+    </main>
 
-<footer>
+    <footer>
         <div class="footer-logo">
             <img src="../static/images/logo.jpg" alt="Logo Taste&Tell">
         </div>
@@ -124,16 +99,7 @@ use App\Views\Flash;
                 <span class="circle">
                     <img src="instagram-icon.png" alt="Instagram">
                 </span>
-                <span class="circle">
-                    <img src="tiktok-icon.png" alt="TikTok">
-                </span>
-                <span class="circle">
-                    <img src="facebook-icon.png" alt="Facebook">
-                </span>
             </div>
-        </div>
-        <div class="footer-bottom">
-        © 2025 Taste&Tell - Tous droits réservés.
         </div>
     </footer>
 </body>
