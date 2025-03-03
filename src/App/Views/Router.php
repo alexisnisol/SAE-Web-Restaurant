@@ -43,7 +43,7 @@ class Router
 
         switch ($action) {
             case 'home':
-                self::render('home.php', 'Accueil', ['index.css']);
+                self::render('home.php', 'Accueil', ['index.css', 'searchbar.css']);
                 break;
 
             case 'login':

@@ -6,20 +6,28 @@ use App\Controllers\Restaurant\Restaurant;
 $restaurants = Restaurant::getRestaurantsNTType();
 ?>
 
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <script defer src="./static/js/carousel.js"></script>
 <div class="hero">
     <div class="gauche">
         <h1>Recherchez et notez les meilleurs restaurants !</h1>
         <form action="/search" method="GET" class="search-container">
-        <div class="location">
-            <span><i class="fas fa-map-marker-alt"></i></span>
-            <span>Paris</span>
+            <div class="location">
+                <span><i class="fas fa-map-marker-alt"></i></span>
+                <span>Orléans</span>
+            </div>
+            <input type="text" name="query" placeholder="Rechercher..." onfocus="showDropdown()" onblur="hideDropdown()">
+            <button type="submit">RECHERCHE</button>
+
+        </form>
+
+        <div class="dropdown" id="dropdown">
+            <p>LAST SEARCHES</p>
+            <ul>
+                <li>Something you've searched before</li>
+                <li>Something you've searched before</li>
+            </ul>
         </div>
-        <input type="text" name="query" placeholder="Rechercher...">
-        <button type="submit">RECHERCHE</button>
-    </form>
     </div>
     <img class="food-image" src="../static/images/plat.png" alt="Plat savoureux">
 </div>
@@ -63,6 +71,14 @@ echo $carousel->render();
     </div>
 </div>
 
-
-
-
+<!--TODO : Add a file -->
+<script>
+    function showDropdown() {
+        document.getElementById('dropdown').style.display = 'block';
+    }
+    function hideDropdown() {
+        setTimeout(() => {
+            document.getElementById('dropdown').style.display = 'none';
+        }, 200);
+    }
+</script>
