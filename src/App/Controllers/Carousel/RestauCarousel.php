@@ -16,11 +16,10 @@ class RestauCarousel {
                         <div class="carousel-track-container">
                             <div class="carousel-track">';
         
-        $html .= $this->generateRestaurantItems();  // Génère les items du carrousel
-
+        $html .= $this->generateRestaurantItems();
         $html .= '       </div>
                         </div>
-                        <a> <img src="../static/images/arrow.png" alt="arrow" class="arrow"></a>
+                        <button class="carousel-btn next-btn" onclick="moverestaurant(1)">&#10095;</button>
                     </div>
                 </div>';
 
@@ -30,7 +29,7 @@ class RestauCarousel {
     private function generateRestaurantItems() {
         $itemsHtml = '';
         foreach ($this->restaurants as $restaurant) {
-            $imageIndex = rand(1, 6);  // Génère un index aléatoire pour l'image
+            $imageIndex = rand(1, 6);
     
             $itemsHtml .= '<a href="./index.php?action=visualisation&idRestau='. $restaurant['id_restaurant'].'" class="restaurant-box-link">
                             <div class="restaurant-box">
