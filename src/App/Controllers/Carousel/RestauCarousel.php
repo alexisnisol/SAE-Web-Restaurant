@@ -20,7 +20,7 @@ class RestauCarousel {
 
         $html .= '       </div>
                         </div>
-                        <button class="carousel-btn next-btn" onclick="moverestaurant(1)">&#10095;</button>
+                        <a> <img src="../static/images/arrow.png" alt="arrow" class="arrow"></a>
                     </div>
                 </div>';
 
