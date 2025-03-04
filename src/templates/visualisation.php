@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
 <div class="container">
     <!-- En-tête du restaurant -->
     <div class="restaurant-header">
-        <img src="<?php Restaurant::getRestaurantImage($restaurant['name']) ?>" alt="<?php echo getcwd(); ?>">
+        <img src="<?php echo Restaurant::getRestaurantImage($restaurant['name']) ?>" alt="Image du restaurant <?php echo $restaurant['name'] ?>">
         <div class="restaurant-info">
             <h2><?php echo $restaurant['name'] ?></h2>
             <p><strong>Lieu : </strong><?php echo $restaurant['region'] . ", " . $restaurant['departement'] . ", " . $restaurant['commune'] ?></p>

@@ -3,6 +3,7 @@ namespace App\Controllers\Carousel;
 
 use App\Controllers\Auth\Auth;
 use App\Controllers\LikeCuisine\LikeCuisine;
+use App\Controllers\Restaurant\Restaurant;
 
 class RestauCarousel {
     private $restaurants;
@@ -49,11 +50,11 @@ class RestauCarousel {
     private function generateRestaurantItems() {
         $itemsHtml = '';
         foreach ($this->restaurants as $restaurant) {
-            $imageIndex = rand(1, 6);
+            $url = Restaurant::getRestaurantImage($restaurant['name']); 
     
             $itemsHtml .= '<a href="./index.php?action=visualisation&idRestau='. $restaurant['id_restaurant'].'" class="restaurant-box-link">
                             <div class="restaurant-box">
-                                <img src="../static/images/plat-carousel' . $imageIndex . '.jpeg" alt="' . htmlspecialchars($restaurant['name']) . '">
+                                <img src=' . $url . ' alt="' . htmlspecialchars($restaurant['name']) . '">
                                 <div class="restaurant-description">
                                     <h2>' . htmlspecialchars($restaurant['name']) . '</h2>
                                     <p>' . htmlspecialchars($restaurant['type']) . '</p>
@@ -69,11 +70,11 @@ class RestauCarousel {
     private function generateLikedCuisineItems($userId) {
         $itemsHtml = '';
         foreach (LikeCuisine::getRestaurantsCuisineAime($userId) as $restaurant) {
-            $imageIndex = rand(1, 6);  // Génère un index aléatoire pour l'image
+            $url = Restaurant::getRestaurantImage($restaurant['name']); 
     
             $itemsHtml .= '<a href="./index.php?action=visualisation&idRestau='. $restaurant['id_restaurant'].'" class="restaurant-box-link">
                             <div class="restaurant-box">
-                                <img src="../static/images/plat-carousel' . $imageIndex . '.jpeg" alt="' . htmlspecialchars($restaurant['name']) . '">
+                                <img src=' . $url . ' alt="' . htmlspecialchars($restaurant['name']) . '">
                                 <div class="restaurant-description">
                                     <h2>' . htmlspecialchars($restaurant['name']) . '</h2>
                                     <p>' . htmlspecialchars($restaurant['type']) . '</p>
