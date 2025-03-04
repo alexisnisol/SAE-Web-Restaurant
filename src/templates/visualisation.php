@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
 <div class="container">
     <!-- En-tête du restaurant -->
     <div class="restaurant-header">
-        <img src="./static/images/plat-carousel<?php echo $imageIndex = rand(1, 6) ?>.jpeg" alt="Image du restaurant">
+        <img src="<?php Restaurant::getRestaurantImage($restaurant['name']) ?>" alt="<?php echo getcwd(); ?>">
         <div class="restaurant-info">
             <h2><?php echo $restaurant['name'] ?></h2>
             <p><strong>Lieu : </strong><?php echo $restaurant['region'] . ", " . $restaurant['departement'] . ", " . $restaurant['commune'] ?></p>

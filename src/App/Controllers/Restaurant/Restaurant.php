@@ -31,5 +31,17 @@ class Restaurant {
         $query->execute();
         return $query->fetchAll();
     }
+
+    static function getRestaurantImage($name) {
+        // Print le chemin courant
+        $jsonData = file_get_contents('./static/data/images.json');
+        $restaurants = json_decode($jsonData, true);
+        foreach ($restaurants as $restaurant) {
+            if ($restaurant['name'] === $name) {
+                return $restaurant['image_url'];
+            }
+        }
+        return null;
+    }
 }
 
