@@ -20,3 +20,6 @@ class AuthTest extends TestCase {
         $this->assertTrue(Auth::isUserLoggedIn());
     }
 }
+
+?>
+
