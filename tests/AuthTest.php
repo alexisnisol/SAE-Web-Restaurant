@@ -23,6 +23,12 @@ class AuthTest extends TestCase {
         $_SESSION['user'] = serialize(new User(1, 'John', 'Doe', 'john@example.com', 'password', 'CLIENT'));
         $user = Auth::getCurrentUser();
         $this->assertInstanceOf(User::class, $user);
+        $this->assertEquals(Auth::getCurrentUser()->id, 1);
+        $this->assertEquals(Auth::getCurrentUser()->firstName, 'John');
+        $this->assertEquals(Auth::getCurrentUser()->lastName, 'Doe');
+        $this->assertEquals(Auth::getCurrentUser()->email, 'john@example.com');
+        $this->assertEquals(Auth::getCurrentUser()->password, 'password');
+        $this->assertEquals(Auth::getCurrentUser()->role, Role::CLIENT);
     }
 }
 
