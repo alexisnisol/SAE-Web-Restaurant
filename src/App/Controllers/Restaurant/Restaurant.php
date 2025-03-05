@@ -19,7 +19,7 @@ class Restaurant {
         return $query->fetchAll();
     }
 
-    static function getRestaurantsNTType() {
+    static function getRestaurantsNJType() {
         $query = App::getApp()->getDB()->prepare('SELECT id_restaurant,name,type, phone, opening_hours, commune FROM RESTAURANT NATURAL JOIN FAIRE_TYPE natural join TYPE');
         $query->execute();
         return $query->fetchAll();
