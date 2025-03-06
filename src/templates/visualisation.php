@@ -2,12 +2,15 @@
 use App\Controllers\Auth\Auth;
 use App\Controllers\Avis\Avis;
 use App\Controllers\Restaurant\Restaurant;
+use App\Controllers\Like\LikeRestaurant;
 use App\Controllers\Like\LikeCuisine;
 
 $idRestau = $_GET['idRestau'];
 $restaurant = Restaurant::getRestaurant($idRestau);
 
 $restaurant = $restaurant[0];
+
+// Cuisine
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
     if (isset($_POST['review']) && isset($_POST['rate'])) {
@@ -40,24 +43,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
     }
 }
 
+// Restaurant
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
+    $userId = Auth::getCurrentUser()->id;
+
+    if (isset($_POST['like_restaurant'])) {
+        $restaurantId = $_POST['restaurant_id'];
+
+        if (LikeRestaurant::isRestaurantLiked($userId, $restaurantId)) {
+            LikeRestaurant::unlikeRestaurant($userId, $restaurantId);
+        } else {
+            LikeRestaurant::likeRestaurant($userId, $restaurantId);
+        }
+
+        header("Location: " . $_SERVER['REQUEST_URI']);
+        exit;
+    }
+}
+
+
 ?>
 <div class="container">
-    <!-- En-tête du restaurant -->
     <div class="restaurant-header">
         <img src="./static/images/plat-carousel<?php echo $imageIndex = rand(1, 6) ?>.jpeg" alt="Image du restaurant">
         <div class="restaurant-info">
             <h2><?php echo $restaurant['name'] ?> 
-                <!-- Bouton Like du restaurant -->
                 <?php
-                $userId = Auth::getCurrentUser()->id;
-                $isRestaurantLiked = LikeCuisine::isCuisineLiked($userId, $restaurant['id_restaurant']);
-                ?>
-                <form action="" method="post" style="display:inline;">
-                    <input type="hidden" name="cuisine" value="<?php echo $restaurant['id_restaurant']; ?>">
-                    <button type="submit" name="like" style="background: none; border: none; cursor: pointer; font-size: 20px;">
-                        <?php echo $isRestaurantLiked ? "❤️" : "♡"; ?>
-                    </button>
-                </form>
+                    $userId = Auth::getCurrentUser()->id;
+                    $isRestaurantLiked = LikeRestaurant::isRestaurantLiked($userId, $restaurant['id_restaurant']);
+                    ?>
+                    <form action="" method="post" style="display:inline;">
+                        <input type="hidden" name="restaurant_id" value="<?php echo $restaurant['id_restaurant']; ?>">
+                        <button type="submit" name="like_restaurant" style="background: none; border: none; cursor: pointer; font-size: 20px;">
+                            <?php echo $isRestaurantLiked ? "❤️" : "♡"; ?>
+                        </button>
+                    </form>
             </h2>
             <p><strong>Lieu : </strong><?php echo $restaurant['region'] . ", " . $restaurant['departement'] . ", " . $restaurant['commune'] ?></p>
             <?php 
