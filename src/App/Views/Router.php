@@ -91,6 +91,10 @@ class Router
                 Auth::checkUserAdmin();
                 self::render('admin/retirer_moderateur.php', 'Retirer un Modérateur', ['form.css']);
                 break;
+            case 'avisModo':
+                Auth::checkUserAdmin();
+                self::render('avisModo.php', 'Avis Modérateur', ['avis.css']);
+                break;
             default:
                 self::render('404.php', 'Page introuvable', ['404.css']);
                 break;

@@ -26,11 +26,18 @@
 }
 
 
-.review h4 {
+.review a {
     font-size: 1.5em;
     margin-bottom: 10px;
     color: #008000;
+    text-decoration: none;
+    transition: font-size 0.3s ease;
 }
+
+.review a:hover {
+    font-size: 1.75em;
+}
+
 
 .review p:first-of-type {
     font-size: 1.2em;

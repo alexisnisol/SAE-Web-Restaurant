@@ -77,7 +77,7 @@ use App\Views\Flash;
             <h3>En savoir plus</h3>
             <ul>
                 <li><a href="./index.php?action=a-propos">À propos</a></li>
-                <li><a href="#sinscrire">S'inscrire</a></li>
+                <li><a href="./index.php?action=register">S'inscrire</a></li>
                 <li><a href="#restaurants">Restaurants à proximité</a></li>
             </ul>
         </div>
@@ -97,7 +97,13 @@ use App\Views\Flash;
             </ul>
             <div class="social-icons">
                 <span class="circle">
-                    <img src="instagram-icon.png" alt="Instagram">
+                    <img src="../static/images/instagram.png" alt="Instagram">
+                </span>
+                <span class="circle">
+                    <img src="../static/images/tiktok.webp" alt="Tiktok">
+                </span>
+                <span class="circle">
+                    <img src="../static/images/X.png" alt="X">
                 </span>
             </div>
         </div>
