@@ -1,48 +1,81 @@
+/* Général */
 .container {
     width: 80%;
     margin: 40px auto;
     text-align: center;
+    animation: fadeIn 1s ease-in-out;
 }
 
 a {
     text-decoration: none;
 }
 
-.section {
+.section, .section2 {
     margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.8s ease-out forwards;
 }
 
-/* Centre le titre principal et le texte */
-.section h1, 
-.section > p
-.section2 h1
-.section2 > p {
+/* Animation fadeIn pour une meilleure transition */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Titre et textes */
+.section h1, .section2 h2, .section2 h1 {
     text-align: center;
     max-width: 700px;
     margin: 0 auto 10px;
+    font-size: 2rem;
+    color: #333;
+    position: relative;
 }
 
-/* Aligne "Notre mission" à gauche */
+.section h1::after, .section2 h2::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 4px;
+    background: #34a26d;
+    margin: 10px auto;
+    border-radius: 2px;
+}
+
 .section h2 {
     text-align: left;
-    margin-left: 0;
+    font-size: 1.8rem;
+    color: #222;
+}
+
+.mission-text h2 {
     margin-bottom: 1rem;
+    /* color: #34a26d; */
 }
 
 .mission-text p {
     margin-bottom: 0.5rem;
+    line-height: 1.6;
+    color: #555;
 }
 
-.section2 h2 {
-    text-align: center;
-    margin-left: 0;
-}
-
-/* Style pour "Notre mission" avec image alignée à droite */
+/* Style pour "Notre mission" avec animation sur l’image */
 .mission-container {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
     justify-content: space-between;
     text-align: left;
 }
@@ -61,9 +94,14 @@ a {
     height: auto;
     border-radius: 10px;
     object-fit: cover;
+    transition: transform 0.3s ease-in-out;
 }
 
-/* Style des étapes */
+.mission-image img:hover {
+    transform: scale(1.05);
+}
+
+/* Style des étapes avec hover dynamique */
 .steps {
     display: flex;
     justify-content: space-between;
@@ -78,10 +116,30 @@ a {
     background: white;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.step:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 .step h3 {
     margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    /* color: #34a26d; */
+}
+
+.step p {
+    color: #666;
+}
+
+.step img {
+    width: 400px;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    object-fit: cover;
 }
 
 /* Responsive */
@@ -93,6 +151,10 @@ a {
 
     .mission-image {
         text-align: center;
+    }
+
+    .mission-image img {
+        width: 100%;
     }
 
     .steps {

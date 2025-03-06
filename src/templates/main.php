@@ -17,7 +17,7 @@ use App\Views\Flash;
             echo '<link rel="stylesheet" href="./static/css/' . $cssFile . '">';
         }
     } ?>
-    <title><?= $title ?? 'Taste&Tell' ?></title>
+    <title>Taste&Tell | <?= $title ?? 'Taste&Tell' ?></title>
 </head>
 <body>
     <header>
