@@ -165,6 +165,19 @@ a {
     transition: 0.3s;
     height: 14%;
   }
+  .star {
+    font-size: 20px;
+    color: #ccc; 
+}
+
+.star.filled {
+    color: gold; 
+}
+
+.star.empty {
+    color: #ccc; 
+}
+
 
 .prev-btn {
     left: 1rem

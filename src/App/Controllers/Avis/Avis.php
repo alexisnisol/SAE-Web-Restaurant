@@ -34,5 +34,12 @@ class Avis {
         $query->bindParam(':id', $idAvis);
         $query->execute();
     }
+
+    static function getMoyAvisRestau($idRestau) {
+        $query = App::getApp()->getDB()->prepare('SELECT AVG(etoile) as moy FROM AVIS WHERE id_restaurant = :id');
+        $query->bindParam(':id', $idRestau);
+        $query->execute();
+        return $query->fetch();
+    }
 }
 

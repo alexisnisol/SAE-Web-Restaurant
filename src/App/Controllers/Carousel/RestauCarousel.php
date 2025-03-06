@@ -3,7 +3,7 @@ namespace App\Controllers\Carousel;
 
 use App\Controllers\Auth\Auth;
 use App\Controllers\LikeCuisine\LikeCuisine;
-
+use App\Controllers\Avis\Avis;
 class RestauCarousel {
     private $restaurants;
 
@@ -25,7 +25,7 @@ class RestauCarousel {
                         <button class="carousel-btn next-btn" onclick="moverestaurant(1)">&#10095;</button>
                     </div>
                 </div>';
-        
+
         if (Auth::isUserLoggedIn() && (! empty(LikeCuisine::getCuisineAime(Auth::getCurrentUser()->id)))) {
             $html .= '<div class="section-restaurants">
                     <h1 class="titre-restaurants">Selon vos types de cuisines préférés</h1>
@@ -50,6 +50,18 @@ class RestauCarousel {
         $itemsHtml = '';
         foreach ($this->restaurants as $restaurant) {
             $imageIndex = rand(1, 6);
+            $moyAvis = Avis::getMoyAvisRestau($restaurant['id_restaurant']);
+            
+            if ($moyAvis['moy'] !== null) {
+                $filledStars = round($moyAvis['moy']);
+                $emptyStars = 5 - $filledStars;
+    
+                // Génération des étoiles
+                $starsHtml = str_repeat('<span class="star filled">★</span>', $filledStars) . 
+                             str_repeat('<span class="star empty">☆</span>', $emptyStars);
+            } else {
+                $starsHtml = '';
+            }
     
             $itemsHtml .= '<a href="./index.php?action=visualisation&idRestau='. $restaurant['id_restaurant'].'" class="restaurant-box-link">
                             <div class="restaurant-box">
@@ -59,6 +71,8 @@ class RestauCarousel {
                                     <p>' . htmlspecialchars($restaurant['type']) . '</p>
                                     <p>' . htmlspecialchars($restaurant['commune']) . '</p>
                                     <p>' . htmlspecialchars($restaurant['phone']) . '</p>
+                                    <p>' . htmlspecialchars($restaurant['opening_hours']) . '</p>
+                                    <div class="restaurant-rating">' . $starsHtml . '</div>
                                 </div>
                             </div>
                         </a>';
@@ -70,6 +84,19 @@ class RestauCarousel {
         $itemsHtml = '';
         foreach (LikeCuisine::getRestaurantsCuisineAime($userId) as $restaurant) {
             $imageIndex = rand(1, 6);  // Génère un index aléatoire pour l'image
+            $moyAvis = Avis::getMoyAvisRestau($restaurant['id_restaurant']);
+            
+            if ($moyAvis['moy'] !== null) {
+
+                $filledStars = round($moyAvis['moy']);
+                $emptyStars = 5 - $filledStars;
+    
+                // Génération des étoiles
+                $starsHtml = str_repeat('<span class="star filled">★</span>', $filledStars) . 
+                             str_repeat('<span class="star empty">☆</span>', $emptyStars);
+            } else {
+                $starsHtml = '';
+            }
     
             $itemsHtml .= '<a href="./index.php?action=visualisation&idRestau='. $restaurant['id_restaurant'].'" class="restaurant-box-link">
                             <div class="restaurant-box">
@@ -80,13 +107,12 @@ class RestauCarousel {
                                     <p>' . htmlspecialchars($restaurant['commune']) . '</p>
                                     <p>' . htmlspecialchars($restaurant['phone']) . '</p>
                                     <p>' . htmlspecialchars($restaurant['opening_hours']) . '</p>
+                                    <div class="restaurant-rating">' . $starsHtml . '</div>
                                 </div>
                             </div>
                         </a>';
         }
         return $itemsHtml;
     }
-    
 }
-
 ?>
