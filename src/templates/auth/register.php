@@ -17,6 +17,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 <div class="page">
     <div class="form-container">
+        <h2>S'inscrire maintenant</h2>
         <form action="#" method="post">
             <div class="input-row">
                 <div class="input-container">
@@ -46,8 +47,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             ?>
             <button type="submit">S'inscrire</button>
         </form>
-
-        <h2>S'inscrire maintenant</h2>
 
         <a href="./index.php?action=login" class="register-link">Déjà un compte ? Connectez-vous</a>
     </div>
