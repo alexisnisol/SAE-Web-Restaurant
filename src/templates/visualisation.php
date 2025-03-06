@@ -1,5 +1,6 @@
 <?php
 use App\Controllers\Auth\Auth;
+use App\Controllers\Auth\Users\User;
 use App\Controllers\Avis\Avis;
 use App\Controllers\Restaurant\Restaurant;
 use App\Controllers\LikeCuisine\LikeCuisine;
@@ -166,7 +167,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
                     ?>
                     <p class="date">Posté le : <?php echo $avis["date_avis"] ?></p>
                     <p><?php echo $avis["avis"] ?></p>
-                    <?php if (Auth::isUserLoggedIn() && Auth::getCurrentUser()->isAdmin()) : ?>
+
+                    <?php if (Auth::isUserLoggedIn() && (Auth::getCurrentUser()->isAdmin() || Auth::getCurrentUser()->isModerator())) : ?>
                         <form action="" method="post" class="delete-form">
                             <input type="hidden" name="delete_review" value="<?php echo $avis['id_avis']; ?>">
                             <button type="submit" class="delete-btn" onclick="return confirm('Êtes-vous sûr de bien vouloir supprimer cet avis ?')">🗑 Supprimer</button>

@@ -3,7 +3,7 @@ namespace App\Controllers\Auth\Users;
 
 enum Role:string {
     case CLIENT = 'CLIENT';
-    case MODERATOR = 'MODERATOR';
+    case MODERATOR = 'MODERATEUR';
     case ADMIN = 'ADMIN';
 
     public static function valueOf(string $role): Role
