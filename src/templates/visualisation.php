@@ -1,5 +1,6 @@
 <?php
 use App\Controllers\Auth\Auth;
+use App\Controllers\Auth\Users\User;
 use App\Controllers\Avis\Avis;
 use App\Controllers\Restaurant\Restaurant;
 use App\Controllers\Like\LikeRestaurant;
@@ -68,18 +69,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
     <div class="restaurant-header">
         <img src="./static/images/plat-carousel<?php echo $imageIndex = rand(1, 6) ?>.jpeg" alt="Image du restaurant">
         <div class="restaurant-info">
-            <h2><?php echo $restaurant['name'] ?> 
-                <?php
-                    $userId = Auth::getCurrentUser()->id;
-                    $isRestaurantLiked = LikeRestaurant::isRestaurantLiked($userId, $restaurant['id_restaurant']);
-                    ?>
-                    <form action="" method="post" style="display:inline;">
-                        <input type="hidden" name="restaurant_id" value="<?php echo $restaurant['id_restaurant']; ?>">
-                        <button type="submit" name="like_restaurant" style="background: none; border: none; cursor: pointer; font-size: 20px;">
-                            <?php echo $isRestaurantLiked ? "❤️" : "♡"; ?>
-                        </button>
-                    </form>
-            </h2>
+        <?php
+            $userId = Auth::getCurrentUser()->id;
+            $isRestaurantLiked = LikeRestaurant::isRestaurantLiked($userId, $restaurant['id_restaurant']);
+            $moyAvis = Avis::getMoyAvisRestau($restaurant['id_restaurant']);
+        ?>
+
+        <h2 style="display:inline;"><?php echo $restaurant['name']; ?></h2>
+        <?php if (isset($moyAvis['moy']) && $moyAvis['moy'] !== null): ?>
+            <p style="display:inline;"><?php echo " ({$moyAvis['moy']}⭐)"; ?></p>
+        <?php endif; ?>
+
+        <form action="" method="post" style="display:inline;">
+            <input type="hidden" name="restaurant_id" value="<?php echo $restaurant['id_restaurant']; ?>">
+            <button type="submit" name="like_restaurant" style="background: none; border: none; cursor: pointer; font-size: 20px;">
+                <?php echo $isRestaurantLiked ? "❤️" : "♡"; ?>
+            </button>
+        </form>
+
             <p><strong>Lieu : </strong><?php echo $restaurant['region'] . ", " . $restaurant['departement'] . ", " . $restaurant['commune'] ?></p>
             <?php 
                 if (! empty($restaurant['brand'])) {
@@ -192,7 +199,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
                     ?>
                     <p class="date">Posté le : <?php echo $avis["date_avis"] ?></p>
                     <p><?php echo $avis["avis"] ?></p>
-                    <?php if (Auth::isUserLoggedIn() && Auth::getCurrentUser()->isAdmin()) : ?>
+
+                    <?php if (Auth::isUserLoggedIn() && (Auth::getCurrentUser()->isAdmin() || Auth::getCurrentUser()->isModerator())) : ?>
                         <form action="" method="post" class="delete-form">
                             <input type="hidden" name="delete_review" value="<?php echo $avis['id_avis']; ?>">
                             <button type="submit" class="delete-btn" onclick="return confirm('Êtes-vous sûr de bien vouloir supprimer cet avis ?')">🗑 Supprimer</button>

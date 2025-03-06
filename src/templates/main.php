@@ -39,7 +39,7 @@ use App\Views\Flash;
             <div class="nav-right">
                 <?php if (Auth::isUserLoggedIn()) : ?>
                     <p>Bonjour, <?= Auth::getCurrentUser()->firstName ?></p>
-                    <?php if (Auth::getCurrentUser()->isAdmin()) : ?>
+                    <?php if (Auth::getCurrentUser()->isAdmin() || Auth::getCurrentUser()->isModerator()) : ?>
                         <a href="index.php?action=dashboard" class="btn-se-connecter">Dashboard</a>
                     <?php endif; ?>
                 <?php else : ?>
