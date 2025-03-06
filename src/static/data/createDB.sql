@@ -96,4 +96,11 @@ CREATE TABLE CUISINE_AIME (
     FOREIGN KEY (id_cuisine) REFERENCES TYPE_CUISINE(id_cuisine)
 ); 
 
+CREATE TABLE RESTAURANT_AIME (
+    id_utilisateur  INT NOT NULL,
+    id_restaurant   INT NOT NULL,
+    PRIMARY KEY (id_utilisateur, id_restaurant), 
+    FOREIGN KEY (id_utilisateur) REFERENCES UTILISATEUR(id_utilisateur), 
+    FOREIGN KEY (id_restaurant) REFERENCES RESTAURANT(id_restaurant)
+);
 
