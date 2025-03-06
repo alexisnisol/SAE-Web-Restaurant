@@ -34,6 +34,10 @@ class App {
         }
         return $this->db;
     }
+
+    public function setDB($path) {
+        $this->db = new SQLiteDatabase($path);
+    }
 }
 
 ?>

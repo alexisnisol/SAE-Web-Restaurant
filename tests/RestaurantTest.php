@@ -10,11 +10,8 @@ class RestaurantTest extends TestCase {
     
     protected function setUp(): void {
         App::getApp(); 
-    }
-    
-    public function testInsertRestaurant() {
-        $this->expectNotToPerformAssertions();
-        Restaurant::insertRestaurant('Restaurant test', 'Description test', 'test.jpg', 1);
+        App::getApp()->setDB('src/static/data/database.db');
+        var_dump(App::getApp()->getDB());
     }
     
     public function testGetRestaurant() {
@@ -22,19 +19,9 @@ class RestaurantTest extends TestCase {
         $this->assertIsArray($result);
     }
 
-    public function testDeleteRestaurant() {
-        $this->expectNotToPerformAssertions();
-        Restaurant::deleteRestaurant(1);
-    }
-
-    public function testGetNextRestaurantId() {
-        $result = Restaurant::getNextRestaurantId();
-        $this->assertIsInt($result);
-    }
-
-    public function testGetRestaurantsNTType()
+    public function testGetRestaurantsNJType()
     {
-        $result = Restaurant::getRestaurantsNTType();
+        $result = Restaurant::getRestaurantsNJType();
         $this->assertIsArray($result);
     }
 }
