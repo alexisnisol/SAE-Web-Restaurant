@@ -13,21 +13,42 @@ $restaurants = Restaurant::getRestaurantsNTType();
         <h1>Recherchez et notez les meilleurs restaurants !</h1>
         <form action="/search" method="GET" class="search-container">
             <div class="location">
-                <span><i class="fas fa-map-marker-alt"></i></span>
-                <span>Orléans</span>
+            <span><i class="fas fa-map-marker-alt"></i></span>
+            <span>Orléans</span>
             </div>
-            <input type="text" name="query" placeholder="Rechercher..." onfocus="showDropdown()" onblur="hideDropdown()">
+            <input type="text" name="query" placeholder="Rechercher..." onfocus="showDropdown()" onblur="hideDropdown()" onkeyup="fetchResults(this.value)">
             <button type="submit">RECHERCHE</button>
-
         </form>
 
         <div class="dropdown" id="dropdown">
-            <p>LAST SEARCHES</p>
-            <ul>
-                <li>Something you've searched before</li>
-                <li>Something you've searched before</li>
+            <p>Résultats</p>
+            <ul id="results-list">
+            
             </ul>
         </div>
+
+        <script>
+            async function fetchResults(query) {
+            if (query.length === 0) {
+                document.getElementById('results-list').innerHTML = '';
+                return;
+            }
+
+            const response = await fetch(`/index.php?action=search&query=${query}`);
+            const results = await response.json();
+
+            const resultsList = document.getElementById('results-list');
+            resultsList.innerHTML = '';
+
+            results.forEach(result => {
+                const li = document.createElement('li');
+                li.textContent = result.name + ' - ' + result.type;
+                resultsList.appendChild(li);
+            });
+
+            showDropdown();
+            }
+        </script>
     </div>
     <img class="food-image" src="../static/images/plat.png" alt="Plat savoureux">
 </div>
