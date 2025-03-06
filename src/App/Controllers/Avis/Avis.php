@@ -29,6 +29,21 @@ class Avis {
         return $query->fetchAll();
     }
 
+    static function getAllAvisByUser($userId) {
+        $query = App::getApp()->getDB()->prepare(
+            'SELECT a.id_avis, a.id_utilisateur, a.id_restaurant, a.etoile, a.avis, a.date_avis, 
+                    r.name AS restaurant_name, u.nom AS user_nom, u.prenom AS user_prenom 
+             FROM AVIS a
+             JOIN RESTAURANT r ON a.id_restaurant = r.id_restaurant
+             JOIN UTILISATEUR u ON a.id_utilisateur = u.id_utilisateur
+             WHERE a.id_utilisateur = :userId'
+        );
+        
+        $query->bindParam(':userId', $userId);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
     static function deleteAvis($idAvis) {
         $query = App::getApp()->getDB()->prepare('DELETE FROM AVIS WHERE id_avis = :id');
         $query->bindParam(':id', $idAvis);

@@ -31,7 +31,7 @@ use App\Views\Flash;
             <div class="nav-center">
                 <ul class="nav-links">
                     <li><a href="./index.php">Découvrir</a></li>
-                    <li><a href="#avis">Vos Avis</a></li>
+                    <li><a href="./index.php?action=avis">Vos Avis</a></li>
                     <li><a href="./index.php?action=carte">Carte</a></li>
                     <li><a href="./index.php?action=a-propos">Plus</a></li>
                 </ul>
