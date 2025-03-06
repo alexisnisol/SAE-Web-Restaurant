@@ -2,7 +2,7 @@
 use App\Controllers\Auth\Auth;
 use App\Controllers\Avis\Avis;
 use App\Controllers\Restaurant\Restaurant;
-use App\Controllers\LikeCuisine\LikeCuisine;
+use App\Controllers\Like\LikeCuisine;
 
 $idRestau = $_GET['idRestau'];
 $restaurant = Restaurant::getRestaurant($idRestau);
@@ -46,7 +46,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
     <div class="restaurant-header">
         <img src="./static/images/plat-carousel<?php echo $imageIndex = rand(1, 6) ?>.jpeg" alt="Image du restaurant">
         <div class="restaurant-info">
-            <h2><?php echo $restaurant['name'] ?></h2>
+            <h2><?php echo $restaurant['name'] ?> 
+                <!-- Bouton Like du restaurant -->
+                <?php
+                $userId = Auth::getCurrentUser()->id;
+                $isRestaurantLiked = LikeCuisine::isCuisineLiked($userId, $restaurant['id_restaurant']);
+                ?>
+                <form action="" method="post" style="display:inline;">
+                    <input type="hidden" name="cuisine" value="<?php echo $restaurant['id_restaurant']; ?>">
+                    <button type="submit" name="like" style="background: none; border: none; cursor: pointer; font-size: 20px;">
+                        <?php echo $isRestaurantLiked ? "❤️" : "♡"; ?>
+                    </button>
+                </form>
+            </h2>
             <p><strong>Lieu : </strong><?php echo $restaurant['region'] . ", " . $restaurant['departement'] . ", " . $restaurant['commune'] ?></p>
             <?php 
                 if (! empty($restaurant['brand'])) {
@@ -105,7 +117,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
                     echo "<p><strong>Site web : </strong><a target='_blank' href='" . $restaurant['website']. "'>" . $restaurant['website'] . "<a/></p>";
                 }
             ?>
-            <!-- <p>Note Moyenne du restaurant : <span class="rating">4.5 ⭐</span></p> -->
             <p><?php echo Auth::getCurrentUser()->id_utilisateur ?></p>
         </div>
     </div>
@@ -190,5 +201,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
         }
     ];
 </script>
-
-
