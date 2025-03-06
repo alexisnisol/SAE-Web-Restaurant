@@ -4,6 +4,7 @@ namespace App\Views;
 
 use App\Controllers\Auth\Auth;
 
+
 class Router
 {
 
@@ -70,6 +71,18 @@ class Router
                 break;
             case 'profil' :
                 self::render('auth/profil.php', 'Profil',['form.css']);
+                break;
+            case 'dashboard':
+                Auth::checkUserLoggedIn();
+                self::render('admin/dashboard.php', 'Dashboard', ['form.css']);
+                break;
+            case 'ajouter_Modo':
+                Auth::checkUserAdmin();
+                self::render('admin/ajouter_moderateur.php', 'Ajouter un Modérateur', ['form.css']);
+                break;
+            case 'retirer_Modo':
+                Auth::checkUserAdmin();
+                self::render('admin/retirer_moderateur.php', 'Retirer un Modérateur', ['form.css']);
                 break;
             default:
                 self::render('404.php', 'Page introuvable', ['404.css']);
