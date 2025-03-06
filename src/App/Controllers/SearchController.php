@@ -9,7 +9,8 @@ class SearchController
     public static function search()
     {
         $query = $_GET['query'] ?? '';
-        $results = Restaurant::searchByName($query);
+        $type = $_GET['type'] ?? '';
+        $results = Restaurant::searchByName($query, $type);
 
         header('Content-Type: application/json');
         send_response($results);
