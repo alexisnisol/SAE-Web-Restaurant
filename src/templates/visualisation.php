@@ -46,7 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
     <div class="restaurant-header">
         <img src="./static/images/plat-carousel<?php echo $imageIndex = rand(1, 6) ?>.jpeg" alt="Image du restaurant">
         <div class="restaurant-info">
-            <h2><?php echo $restaurant['name'] ?></h2>
+        <?php $moyAvis = Avis::getMoyAvisRestau($restaurant['id_restaurant']);?>
+        <h2 style="display:inline;"><?php echo $restaurant['name']; ?></h2>
+        <?php if (isset($moyAvis['moy']) && $moyAvis['moy'] !== null): ?>
+            <p style="display:inline;"><?php echo " ({$moyAvis['moy']}⭐)"; ?></p>
+        <?php endif; ?>
+
+
             <p><strong>Lieu : </strong><?php echo $restaurant['region'] . ", " . $restaurant['departement'] . ", " . $restaurant['commune'] ?></p>
             <?php 
                 if (! empty($restaurant['brand'])) {
