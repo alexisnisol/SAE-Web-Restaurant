@@ -12,9 +12,8 @@ use App\Controllers\Restaurant\Restaurant;
         <?php else: ?>
             <h3>Vos avis :</h3>
             <?php
-            $userId = Auth::getCurrentUser()->id;
 
-            $avisUser = Avis::getAllAvisByUser($userId);
+            $avisUser = Avis::getAllAvis();
 
             if (empty($avisUser)): ?>
                 <p>Vous retrouverez vos avis ici.</p>
