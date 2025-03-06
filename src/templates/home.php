@@ -4,54 +4,41 @@ use App\Controllers\Carousel\RestauCarousel;
 use App\Controllers\Restaurant\Restaurant;
 
 $restaurants = Restaurant::getRestaurantsNTType();
+$types = Restaurant::getTypes();
 ?>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<script defer src="./static/js/search.js"></script>
 <script defer src="./static/js/carousel.js"></script>
 <div class="hero">
     <div class="gauche">
         <h1>Recherchez et notez les meilleurs restaurants !</h1>
         <form action="/search" method="GET" class="search-container">
             <div class="location">
-            <span><i class="fas fa-map-marker-alt"></i></span>
-            <span>Orléans</span>
+                <span><i class="fas fa-map-marker-alt"></i></span>
+                <span>Orléans</span>
             </div>
-            <input type="text" name="query" placeholder="Rechercher..." onfocus="showDropdown()" onblur="hideDropdown()" onkeyup="fetchResults(this.value)">
+            <input type="text" id="query" name="query" placeholder="Rechercher..." onfocus="showDropdown()" onblur="hideDropdown()" onkeyup="fetchResults(this.value)">
+            <select name="type" id="type" onchange="fetchResults()">
+                <?php
+                echo "<option value=''>Tous les types</option>";
+                foreach ($types as $type) {
+                    $type = $type['type'];
+                    echo "<option value='$type'>$type</option>";
+                }
+                ?>
+            </select>
             <button type="submit">RECHERCHE</button>
         </form>
 
         <div class="dropdown" id="dropdown">
             <p>Résultats</p>
-            <ul id="results-list">
-            
-            </ul>
+            <ul id="results-list"></ul>
         </div>
-
-        <script>
-            async function fetchResults(query) {
-            if (query.length === 0) {
-                document.getElementById('results-list').innerHTML = '';
-                return;
-            }
-
-            const response = await fetch(`/index.php?action=search&query=${query}`);
-            const results = await response.json();
-
-            const resultsList = document.getElementById('results-list');
-            resultsList.innerHTML = '';
-
-            results.forEach(result => {
-                const li = document.createElement('li');
-                li.textContent = result.name + ' - ' + result.type;
-                resultsList.appendChild(li);
-            });
-
-            showDropdown();
-            }
-        </script>
     </div>
     <img class="food-image" src="../static/images/plat.png" alt="Plat savoureux">
 </div>
+
 
 <?php
 $carousel = new RestauCarousel($restaurants);
@@ -91,15 +78,3 @@ echo $carousel->render();
         </div>
     </div>
 </div>
-
-<!--TODO : Add a file -->
-<script>
-    function showDropdown() {
-        document.getElementById('dropdown').style.display = 'block';
-    }
-    function hideDropdown() {
-        setTimeout(() => {
-            document.getElementById('dropdown').style.display = 'none';
-        }, 200);
-    }
-</script>

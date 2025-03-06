@@ -1,13 +1,16 @@
 
 .dropdown {
-    display:none;
-    width: 100%;
+    display: none;
+    width: 35vw;
     background: white;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     padding: 10px;
+    z-index: 1000;
+    position: relative;
 }
+
 .dropdown p {
     font-size: 12px;
     color: #666;
@@ -27,4 +30,13 @@
 }
 .dropdown li:hover {
     background: #f0f0f0;
+}
+
+#type {
+    background: white;
+    border: 0px;
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 1000;
+    position: relative;
 }
