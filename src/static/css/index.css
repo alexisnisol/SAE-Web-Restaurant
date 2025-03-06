@@ -3,20 +3,22 @@ body {
     background-color: #f3f3f3;
 }
 
+a {
+    text-decoration: none;
+}
+
 .hero {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
     height: 50vh;
-    background-color: #34a26d;
+    background: linear-gradient(135deg, #367943, #61916e);
     color: white;
     padding: 120px 10%;
     border-radius: 20px;
     margin: 50px auto;
     max-width: 90%;
     position: relative;
-    overflow: hidden;
 }
 
 
@@ -42,7 +44,7 @@ body {
 
 .titre-restaurants {
     font-size: 2rem;
-    padding-left: 2vw;
+    padding-left: 5vw;
     color: #333;
 }
 
@@ -65,15 +67,13 @@ body {
 }
 
 .search-container button {
-    padding: 10px 20px;
+    padding: 12px 25px;
     background-color: #006d5b;
     color: white;
     border: none;
     cursor: pointer;
-    margin-right: 0.1rem;
     font-size: 14px;
     font-weight: bold;
-    border-radius: 10px;
     transition: background-color 0.3s;
 }
 
@@ -84,17 +84,115 @@ body {
 
 .food-image {
     position: absolute;
-    right: -100px;
+    right: -50px;
     bottom: -75px;
     max-width: 50%;
     max-height: 100%;
     border-radius: 20px;
     object-fit: cover;
+    clip-path: inset(0 50px 74px 0px round 20px);
+}
+
+
+
+/** restaurant carousel **/
+
+.restaurant-carousel {
+    position: relative;
+    width: 90%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.carousel-track-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease-in-out;
+}
+
+.restaurant-box {
+    flex: 0 0 calc(25% - 20px); /* 4 éléments par ligne */
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;  /* Change le curseur en main pour signaler que c'est cliquable */
+    position: relative;
+    height: 95%;
+}
+
+.restaurant-box img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.restaurant-description {
+    padding: 15px;
+}
+
+.restaurant-description h2 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    color: #000;
+}
+
+.restaurant-description p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.carousel-btn {
+    position: absolute;
+    background-color: rgb(42, 157, 143);
+    color: white;
+    border: medium;
+    font-size: 1rem;
+    padding: 1vw;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.3s;
+    height: 14%;
+  }
+  .star {
+    font-size: 20px;
+    color: #ccc; 
+}
+
+.star.filled {
+    color: gold; 
+}
+
+.star.empty {
+    color: #ccc; 
+}
+
+
+.prev-btn {
+    left: 1rem
+}
+
+.next-btn {
+    right: 1rem;
+}
+.restaurant-box-link {
+    flex: 0 0 calc(25% - 20px); /* 4 éléments par ligne */
+    display: block;
+    text-decoration: none;  /* Pour enlever le soulignement du lien */
 }
 
 /*carrousel 1*/
-
-/*carrouseul 2*/
 
 /*avis main*/
 
@@ -115,6 +213,7 @@ body {
     width: 50%;
     height: auto;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
 }
 
 
@@ -182,85 +281,11 @@ h1 {
     border: 5px solid white;
 }
 
-.restaurant-carousel {
-    position: relative;
-    width: 90%;
-    margin: auto;
-    overflow: hidden;
-    padding: 20px 0;
-}
 
-.carousel-track-container {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-}
 
-.carousel-track {
-    display: flex;
-    gap: 20px;
-    transition: transform 0.5s ease-in-out;
-}
 
-.restaurant-box {
-    flex: 0 0 calc(25% - 20px); /* 4 éléments par ligne */
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    text-align: center;
-    cursor: pointer;  /* Change le curseur en main pour signaler que c'est cliquable */
-    position: relative;
-}
 
-.restaurant-box img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-}
 
-.restaurant-description {
-    padding: 15px;
-}
-
-.restaurant-description h2 {
-    font-size: 1.2rem;
-    margin-bottom: 8px;
-    color: #000;
-}
-
-.restaurant-description p {
-    font-size: 0.9rem;
-    color: #666;
-}
-
-.carousel-btn {
-    position: absolute;
-    background-color: #2a9d8f;
-    color: white;
-    border: none;
-    font-size: 1.5rem;
-    padding: 15px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 10;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: all 0.3s ease;
-}
-
-.prev-btn {
-    left: 10px;
-}
-
-.next-btn {
-    right: 10px;
-}
-.restaurant-box-link {
-    flex: 0 0 calc(25% - 20px); /* 4 éléments par ligne */
-    display: block;
-    text-decoration: none;  /* Pour enlever le soulignement du lien */
-}
 /* Responsive Design */
 /* @media (min-width: 768px) {
     .hero {

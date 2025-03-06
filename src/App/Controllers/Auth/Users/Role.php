@@ -3,7 +3,7 @@ namespace App\Controllers\Auth\Users;
 
 enum Role:string {
     case CLIENT = 'CLIENT';
-    case MODERATOR = 'MODERATOR';
+    case MODERATOR = 'MODERATEUR';
     case ADMIN = 'ADMIN';
 
     public static function valueOf(string $role): Role
@@ -12,7 +12,17 @@ enum Role:string {
     }
 
     private static function tryFromString(string $role): ?Role {
-        return array_find(Role::cases(), fn($case) => $case->value === $role);
+        switch ($role) {
+            case self::CLIENT->value:
+                return self::CLIENT;
+            case self::MODERATOR->value:
+                return self::MODERATOR;
+            case self::ADMIN->value:
+                return self::ADMIN;
+            default:
+                return self::CLIENT;
+        }
+        // return array_find(Role::cases(), fn($case) => $case->value === $role);
     }
 }
 ?>
