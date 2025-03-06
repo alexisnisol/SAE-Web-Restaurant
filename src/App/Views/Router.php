@@ -5,6 +5,9 @@ namespace App\Views;
 use App\Controllers\Auth\Auth;
 
 
+use App\Controllers\SearchController;
+
+
 class Router
 {
 
@@ -44,7 +47,7 @@ class Router
 
         switch ($action) {
             case 'home':
-                self::render('home.php', 'Accueil', ['index.css']);
+                self::render('home.php', 'Accueil', ['index.css', 'searchbar.css']);
                 break;
 
             case 'login':
@@ -66,12 +69,13 @@ class Router
             case 'carte':
                 self::render('carte.php', 'Carte', ['carte.css']);
                 break;
-            case 'jsonToCsv':
-                self::render('jsonToCsv.php', 'Conversion JSON to CSV', ['jsonToCsv.css']);
-                break;
             case 'profil' :
                 self::render('auth/profil.php', 'Profil',['form.css']);
                 break;
+            case 'search':
+                SearchController::search();
+                self::render('home.php', 'Accueil', ['index.css', 'searchbar.css']);
+
             case 'dashboard':
                 Auth::checkUserLoggedIn();
                 self::render('admin/dashboard.php', 'Dashboard', ['form.css']);

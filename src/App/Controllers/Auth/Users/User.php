@@ -20,6 +20,7 @@ class User {
         $this->email = $email;
         $this->password = $password;
         $this->role = Role::valueOf($role);
+        
     }
 
     public function getRole(): Role {

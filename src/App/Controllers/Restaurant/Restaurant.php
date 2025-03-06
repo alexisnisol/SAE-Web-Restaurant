@@ -31,5 +31,28 @@ class Restaurant {
         $query->execute();
         return $query->fetchAll();
     }
+
+    static function getTypes() {
+        $query = App::getApp()->getDB()->prepare('SELECT * FROM TYPE');
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    static function searchByName($name, $type, $limit = 10) {
+        $nameParam = '%' . $name . '%';
+        $typeParam = '%' . $type . '%';
+        $query = App::getApp()->getDB()->prepare('
+            SELECT * FROM RESTAURANT 
+            NATURAL JOIN FAIRE_TYPE
+            NATURAL JOIN TYPE
+            WHERE name LIKE :name
+            AND type LIKE :type
+            LIMIT :limit');
+        $query->bindParam(':name', $nameParam);
+        $query->bindParam(':type', $typeParam);
+        $query->bindParam(':limit', $limit);
+        $query->execute();
+        return $query->fetchAll();
+    }
 }
 
