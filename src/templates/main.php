@@ -77,8 +77,8 @@ use App\Views\Flash;
             <h3>En savoir plus</h3>
             <ul>
                 <li><a href="./index.php?action=a-propos">À propos</a></li>
-                <li><a href="#sinscrire">S'inscrire</a></li>
-                <li><a href="#restaurants">Restaurants à proximité</a></li>
+                <li><a href="./index.php?action=register">S'inscrire</a></li>
+                <li><a href="./index.php?action=carte">Restaurants à proximité</a></li>
             </ul>
         </div>
         <div class="footer-column">
