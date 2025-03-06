@@ -4,7 +4,9 @@ namespace App\Views;
 
 use App\Controllers\Auth\Auth;
 
+
 use App\Controllers\SearchController;
+
 
 class Router
 {
@@ -73,6 +75,18 @@ class Router
             case 'search':
                 SearchController::search();
                 self::render('home.php', 'Accueil', ['index.css', 'searchbar.css']);
+
+            case 'dashboard':
+                Auth::checkUserLoggedIn();
+                self::render('admin/dashboard.php', 'Dashboard', ['form.css']);
+                break;
+            case 'ajouter_Modo':
+                Auth::checkUserAdmin();
+                self::render('admin/ajouter_moderateur.php', 'Ajouter un Modérateur', ['form.css']);
+                break;
+            case 'retirer_Modo':
+                Auth::checkUserAdmin();
+                self::render('admin/retirer_moderateur.php', 'Retirer un Modérateur', ['form.css']);
                 break;
             default:
                 self::render('404.php', 'Page introuvable', ['404.css']);
