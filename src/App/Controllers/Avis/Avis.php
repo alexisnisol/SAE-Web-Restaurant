@@ -34,5 +34,15 @@ class Avis {
         $query->bindParam(':id', $idAvis);
         $query->execute();
     }
+
+    static function deleteLastAvis() {
+        $query = App::getApp()->getDB()->query('SELECT MAX(id_avis) as max_id FROM AVIS');
+        $result = $query->fetch();
+        if ($result) {
+            $query = App::getApp()->getDB()->prepare('DELETE FROM AVIS WHERE id_avis = :id');
+            $query->bindParam(':id', $result['max_id']);
+            $query->execute();
+        }
+    }
 }
 
