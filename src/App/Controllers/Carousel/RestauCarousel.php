@@ -5,6 +5,7 @@ use App\Controllers\Auth\Auth;
 use App\Controllers\Avis\Avis;
 use App\Controllers\Like\LikeCuisine;
 use App\Controllers\Like\LikeRestaurant;
+use App\Controllers\Restaurant\Restaurant;
 
 class RestauCarousel {
     private $restaurants;
@@ -69,7 +70,7 @@ class RestauCarousel {
     private function generateRestaurantItems() {
         $itemsHtml = '';
         foreach ($this->restaurants as $restaurant) {
-            $imageIndex = rand(1, 6);
+            $url = Restaurant::getRestaurantImage($restaurant['name']); 
             $moyAvis = Avis::getMoyAvisRestau($restaurant['id_restaurant']);
 
             if ($moyAvis['moy'] !== null) {
@@ -84,7 +85,7 @@ class RestauCarousel {
 
             $itemsHtml .= '<a href="./index.php?action=visualisation&idRestau='. $restaurant['id_restaurant'].'" class="restaurant-box-link">
                             <div class="restaurant-box">
-                                <img src="../static/images/plat-carousel' . $imageIndex . '.jpeg" alt="' . htmlspecialchars($restaurant['name']) . '">
+                                <img src=' . $url . ' alt="' . htmlspecialchars($restaurant['name']) . '">
                                 <div class="restaurant-description">
                                     <h2>' . htmlspecialchars($restaurant['name']) . '</h2>
                                     <p>' . htmlspecialchars($restaurant['type']) . '</p>
@@ -101,7 +102,7 @@ class RestauCarousel {
     private function generateLikedCuisineItems($userId) {
         $itemsHtml = '';
         foreach (LikeCuisine::getRestaurantsCuisineAime($userId) as $restaurant) {
-            $imageIndex = rand(1, 6);
+            $url = Restaurant::getRestaurantImage($restaurant['name']); 
             $moyAvis = Avis::getMoyAvisRestau($restaurant['id_restaurant']);
 
             if ($moyAvis['moy'] !== null) {
@@ -118,7 +119,7 @@ class RestauCarousel {
 
             $itemsHtml .= '<a href="./index.php?action=visualisation&idRestau='. $restaurant['id_restaurant'].'" class="restaurant-box-link">
                             <div class="restaurant-box">
-                                <img src="../static/images/plat-carousel' . $imageIndex . '.jpeg" alt="' . htmlspecialchars($restaurant['name']) . '">
+                                <img src=' . $url . ' alt="' . htmlspecialchars($restaurant['name']) . '">
                                 <div class="restaurant-description">
                                     <h2>' . htmlspecialchars($restaurant['name']) . '</h2>
                                     <p>' . htmlspecialchars($restaurant['type']) . '</p>
@@ -136,10 +137,10 @@ class RestauCarousel {
     private function generateLikedRestaurantItems($userId) {
         $itemsHtml = '';
         $likedRestaurants = LikeRestaurant::getRestaurantsAimes($userId);
-    
+        $url = Restaurant::getRestaurantImage($restaurant['name']); 
         if (!empty($likedRestaurants)) {
             foreach ($likedRestaurants as $restaurant) {
-                $imageIndex = rand(1, 6);
+
                 $moyAvis = Avis::getMoyAvisRestau($restaurant['id_restaurant']);
     
                 if ($moyAvis['moy'] !== null) {
@@ -152,9 +153,11 @@ class RestauCarousel {
                     $starsHtml = '';
                 }
     
+                
+
                 $itemsHtml .= '<a href="./index.php?action=visualisation&idRestau='. $restaurant['id_restaurant'].'" class="restaurant-box-link">
                                 <div class="restaurant-box">
-                                    <img src="../static/images/plat-carousel' . $imageIndex . '.jpeg" alt="' . htmlspecialchars($restaurant['name']) . '">
+                                    <img src=' . $url . ' alt="' . htmlspecialchars($restaurant['name']) . '">
                                     <div class="restaurant-description">
                                         <h2>' . htmlspecialchars($restaurant['name']) . '</h2>
                                         <p>' . htmlspecialchars($restaurant['type']) . '</p>

@@ -19,7 +19,7 @@ class Restaurant {
         return $query->fetchAll();
     }
 
-    static function getRestaurantsNTType() {
+    static function getRestaurantsNJType() {
         $query = App::getApp()->getDB()->prepare('SELECT id_restaurant,name,type, phone, opening_hours, commune FROM RESTAURANT NATURAL JOIN FAIRE_TYPE natural join TYPE');
         $query->execute();
         return $query->fetchAll();
@@ -30,6 +30,18 @@ class Restaurant {
         $query->bindParam(':id', $id);
         $query->execute();
         return $query->fetchAll();
+    }
+
+    static function getRestaurantImage($name) {
+        // Print le chemin courant
+        $jsonData = file_get_contents('./static/data/images.json');
+        $restaurants = json_decode($jsonData, true);
+        foreach ($restaurants as $restaurant) {
+            if ($restaurant['name'] === $name) {
+                return $restaurant['image_url'];
+            }
+        }
+        return null;
     }
 
     static function getTypes() {

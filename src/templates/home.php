@@ -4,7 +4,7 @@ use App\Controllers\Carousel\RestauCarousel;
 use App\Controllers\Restaurant\Restaurant;
 use App\Controllers\Avis\Avis;
 
-$restaurants = Restaurant::getRestaurantsNTType();
+$restaurants = Restaurant::getRestaurantsNJType();
 $types = Restaurant::getTypes();
 $dernierAvis = Avis::getLastGoodAvis();
 ?>
