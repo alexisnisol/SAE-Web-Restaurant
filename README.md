@@ -1,5 +1,7 @@
 # Projet SAE Web - Restaurant
 
+Lien Video : https://www.youtube.com/watch?v=Z4LPG_LXuFg
+
 ## Description
 
 Ce projet est une application web permettant aux utilisateurs de rechercher des restaurants, donner des avis et gérer leurs préférences culinaires. Il inclut un système d'authentification, de gestion des avis et de préférences des utilisateurs.
