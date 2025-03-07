@@ -1,13 +1,17 @@
 <?php
 use App\Controllers\Auth\Auth;
+use App\Controllers\Auth\Users\User;
 use App\Controllers\Avis\Avis;
 use App\Controllers\Restaurant\Restaurant;
-use App\Controllers\LikeCuisine\LikeCuisine;
+use App\Controllers\Like\LikeRestaurant;
+use App\Controllers\Like\LikeCuisine;
 
 $idRestau = $_GET['idRestau'];
 $restaurant = Restaurant::getRestaurant($idRestau);
 
 $restaurant = $restaurant[0];
+
+// Cuisine
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
     if (isset($_POST['review']) && isset($_POST['rate'])) {
@@ -40,13 +44,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
     }
 }
 
+// Restaurant
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
+    $userId = Auth::getCurrentUser()->id;
+
+    if (isset($_POST['like_restaurant'])) {
+        $restaurantId = $_POST['restaurant_id'];
+
+        if (LikeRestaurant::isRestaurantLiked($userId, $restaurantId)) {
+            LikeRestaurant::unlikeRestaurant($userId, $restaurantId);
+        } else {
+            LikeRestaurant::likeRestaurant($userId, $restaurantId);
+        }
+
+        header("Location: " . $_SERVER['REQUEST_URI']);
+        exit;
+    }
+}
+
+
 ?>
 <div class="container">
-    <!-- En-tête du restaurant -->
     <div class="restaurant-header">
         <img src="<?php echo Restaurant::getRestaurantImage($restaurant['name']) ?>" alt="Image du restaurant <?php echo $restaurant['name'] ?>">
         <div class="restaurant-info">
-            <h2><?php echo $restaurant['name'] ?></h2>
+        <?php
+            $userId = Auth::getCurrentUser()->id;
+            $isRestaurantLiked = LikeRestaurant::isRestaurantLiked($userId, $restaurant['id_restaurant']);
+            $moyAvis = Avis::getMoyAvisRestau($restaurant['id_restaurant']);
+        ?>
+
+        <h2 style="display:inline;"><?php echo $restaurant['name']; ?></h2>
+        <?php if (isset($moyAvis['moy']) && $moyAvis['moy'] !== null): ?>
+            <p style="display:inline;"><?php echo " ({$moyAvis['moy']}⭐)"; ?></p>
+        <?php endif; ?>
+
+        <form action="" method="post" style="display:inline;">
+            <input type="hidden" name="restaurant_id" value="<?php echo $restaurant['id_restaurant']; ?>">
+            <button type="submit" name="like_restaurant" style="background: none; border: none; cursor: pointer; font-size: 20px;">
+                <?php echo $isRestaurantLiked ? "❤️" : "♡"; ?>
+            </button>
+        </form>
+
             <p><strong>Lieu : </strong><?php echo $restaurant['region'] . ", " . $restaurant['departement'] . ", " . $restaurant['commune'] ?></p>
             <?php 
                 if (! empty($restaurant['brand'])) {
@@ -123,7 +163,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
                     echo "<p><strong>Site web : </strong><a target='_blank' href='" . $restaurant['website']. "'>" . $restaurant['website'] . "<a/></p>";
                 }
             ?>
-            <!-- <p>Note Moyenne du restaurant : <span class="rating">4.5 ⭐</span></p> -->
             <p><?php echo Auth::getCurrentUser()->id_utilisateur ?></p>
         </div>
     </div>
@@ -178,7 +217,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
                     ?>
                     <p class="date">Posté le : <?php echo $avis["date_avis"] ?></p>
                     <p><?php echo $avis["avis"] ?></p>
-                    <?php if (Auth::isUserLoggedIn() && Auth::getCurrentUser()->isAdmin()) : ?>
+
+                    <?php if (Auth::isUserLoggedIn() && (Auth::getCurrentUser()->isAdmin() || Auth::getCurrentUser()->isModerator())) : ?>
                         <form action="" method="post" class="delete-form">
                             <input type="hidden" name="delete_review" value="<?php echo $avis['id_avis']; ?>">
                             <button type="submit" class="delete-btn" onclick="return confirm('Êtes-vous sûr de bien vouloir supprimer cet avis ?')">🗑 Supprimer</button>
@@ -208,5 +248,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
         }
     ];
 </script>
-
-

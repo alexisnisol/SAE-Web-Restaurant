@@ -25,6 +25,11 @@ class Auth
         }
         return null;
     }
+    static function checkUserAdmin() {
+        if(!self::isUserLoggedIn() || !self::getCurrentUser()->isAdmin()){
+            header('Location: /index.php');
+        }
+    }
 
     static function update() {
         if (self::isUserLoggedIn()) {

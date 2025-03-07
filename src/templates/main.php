@@ -17,7 +17,7 @@ use App\Views\Flash;
             echo '<link rel="stylesheet" href="./static/css/' . $cssFile . '">';
         }
     } ?>
-    <title><?= $title ?? 'Taste&Tell' ?></title>
+    <title>Taste&Tell | <?= $title ?? 'Taste&Tell' ?></title>
 </head>
 <body>
     <header>
@@ -31,7 +31,10 @@ use App\Views\Flash;
             <div class="nav-center">
                 <ul class="nav-links">
                     <li><a href="./index.php">Découvrir</a></li>
-                    <li><a href="#avis">Vos Avis</a></li>
+
+                <?php if (Auth::isUserLoggedIn()) : ?>
+                    <li><a href="./index.php?action=avis">Vos Avis</a></li>
+                <?php endif; ?>
                     <li><a href="./index.php?action=carte">Carte</a></li>
                     <li><a href="./index.php?action=a-propos">Plus</a></li>
                 </ul>
@@ -39,7 +42,7 @@ use App\Views\Flash;
             <div class="nav-right">
                 <?php if (Auth::isUserLoggedIn()) : ?>
                     <p>Bonjour, <?= Auth::getCurrentUser()->firstName ?></p>
-                    <?php if (Auth::getCurrentUser()->isAdmin()) : ?>
+                    <?php if (Auth::getCurrentUser()->isAdmin() || Auth::getCurrentUser()->isModerator()) : ?>
                         <a href="index.php?action=dashboard" class="btn-se-connecter">Dashboard</a>
                     <?php endif; ?>
                 <?php else : ?>
@@ -77,8 +80,9 @@ use App\Views\Flash;
             <h3>En savoir plus</h3>
             <ul>
                 <li><a href="./index.php?action=a-propos">À propos</a></li>
-                <li><a href="#sinscrire">S'inscrire</a></li>
-                <li><a href="#restaurants">Restaurants à proximité</a></li>
+                <li><a href="./index.php?action=register">S'inscrire</a></li>
+                <li><a href="./index.php?action=carte">Restaurants à proximité</a></li>
+
             </ul>
         </div>
         <div class="footer-column">
@@ -96,6 +100,18 @@ use App\Views\Flash;
                 <li>Nos réseaux</li>
             </ul>
             <div class="social-icons">
+                <span class="circle">
+                    <img src="../static/images/instagram.png" alt="Instagram">
+                </span>
+                <span class="circle">
+                    <img src="../static/images/tiktok.webp" alt="Tiktok">
+                </span>
+                <span class="circle">
+                    <img src="../static/images/X.png" alt="X">
+                </span>
+                <span class="circle">
+                    <img src="instagram-icon.png" alt="Instagram">
+                </span>
                 <span class="circle">
                     <img src="instagram-icon.png" alt="Instagram">
                 </span>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\LikeCuisine;
+namespace App\Controllers\Like;
 
 use App;
 

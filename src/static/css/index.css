@@ -19,7 +19,6 @@ a {
     margin: 50px auto;
     max-width: 90%;
     position: relative;
-    overflow: hidden;
 }
 
 
@@ -85,12 +84,13 @@ a {
 
 .food-image {
     position: absolute;
-    right: -100px;
+    right: -50px;
     bottom: -75px;
     max-width: 50%;
     max-height: 100%;
     border-radius: 20px;
     object-fit: cover;
+    clip-path: inset(0 50px 74px 0px round 20px);
 }
 
 
@@ -165,6 +165,19 @@ a {
     transition: 0.3s;
     height: 14%;
   }
+  .star {
+    font-size: 20px;
+    color: #ccc; 
+}
+
+.star.filled {
+    color: gold; 
+}
+
+.star.empty {
+    color: #ccc; 
+}
+
 
 .prev-btn {
     left: 1rem
@@ -200,6 +213,7 @@ a {
     width: 50%;
     height: auto;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
 }
 
 
