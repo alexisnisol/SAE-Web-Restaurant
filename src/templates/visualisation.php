@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
                 if (! empty($restaurant['phone'])) {
                     echo "<p><strong>Tel : </strong>📞 " . $restaurant['phone'] . "</p>";
                 }
-                $moyenne = Avis::moyenneRestaurant($restaurant['id_restaurant']);
+                $moyenne = Avis::getMoyAvisRestau($restaurant['id_restaurant'])['moy'];
                 if (!empty($moyenne)) {
                     $fullStars = floor($moyenne);
                     $halfStar = ($moyenne - $fullStars) >= 0.5 ? 1 : 0;

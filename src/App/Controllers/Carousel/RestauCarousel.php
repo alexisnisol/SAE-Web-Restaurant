@@ -5,6 +5,7 @@ use App\Controllers\Auth\Auth;
 use App\Controllers\Avis\Avis;
 use App\Controllers\Like\LikeCuisine;
 use App\Controllers\Like\LikeRestaurant;
+use App\Controllers\Restaurant\Restaurant;
 
 class RestauCarousel {
     private $restaurants;
