@@ -2,12 +2,16 @@
 
 namespace Tests;
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
 use PHPUnit\Framework\TestCase;
 use App\Controllers\Auth\AuthForm;
+use App;
 
 class AuthFormTest extends TestCase {
+
+    protected function setUp(): void {
+        App::getApp()->setDB('src/static/data/database.db');
+    }
+
     public function testCheckLoginFormWithWrongCredentials() {
         $result = AuthForm::checkLoginForm('wrong@example.com', 'password');
         $this->assertEquals("Nom d'utilisateur incorrect", $result);
@@ -15,7 +19,7 @@ class AuthFormTest extends TestCase {
 
     public function testCheckRegisterFormWithValidData() {
         $result = AuthForm::checkRegisterForm('new@example.com', 'Password1', 'Password1', 'John', 'Doe');
-        $this->assertEquals('', $result);
+        $this->assertEquals('Un utilisateur avec cet email existe déjà', $result);
     }
 }
 
