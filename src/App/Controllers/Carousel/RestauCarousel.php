@@ -54,7 +54,7 @@ class RestauCarousel {
                         <div class="carousel-track-container">
                             <div class="carousel-track">';
 
-            $html .= $this->generateLikedCuisineItems(Auth::getCurrentUser()->id);  // Génère les items du carrousel
+            $html .= $this->generateLikedCuisineItems(Auth::getCurrentUser()->id);
 
             $html .= '       </div>
                             </div>
@@ -136,11 +136,22 @@ class RestauCarousel {
     private function generateLikedRestaurantItems($userId) {
         $itemsHtml = '';
         $likedRestaurants = LikeRestaurant::getRestaurantsAimes($userId);
-
+    
         if (!empty($likedRestaurants)) {
             foreach ($likedRestaurants as $restaurant) {
                 $imageIndex = rand(1, 6);
-
+                $moyAvis = Avis::getMoyAvisRestau($restaurant['id_restaurant']);
+    
+                if ($moyAvis['moy'] !== null) {
+                    $filledStars = round($moyAvis['moy']);
+                    $emptyStars = 5 - $filledStars;
+    
+                    $starsHtml = str_repeat('<span class="star filled">★</span>', $filledStars) .
+                                 str_repeat('<span class="star empty">☆</span>', $emptyStars);
+                } else {
+                    $starsHtml = '';
+                }
+    
                 $itemsHtml .= '<a href="./index.php?action=visualisation&idRestau='. $restaurant['id_restaurant'].'" class="restaurant-box-link">
                                 <div class="restaurant-box">
                                     <img src="../static/images/plat-carousel' . $imageIndex . '.jpeg" alt="' . htmlspecialchars($restaurant['name']) . '">
@@ -149,6 +160,7 @@ class RestauCarousel {
                                         <p>' . htmlspecialchars($restaurant['type']) . '</p>
                                         <p>' . htmlspecialchars($restaurant['commune']) . '</p>
                                         <p>' . htmlspecialchars($restaurant['phone']) . '</p>
+                                        <div class="restaurant-rating">' . $starsHtml . '</div>
                                     </div>
                                 </div>
                             </a>';
@@ -156,8 +168,9 @@ class RestauCarousel {
         } else {
             $itemsHtml .= '<p>Aucun restaurant favori enregistré.</p>';
         }
-
+    
         return $itemsHtml;
     }
+    
 }
 ?>

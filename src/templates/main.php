@@ -109,12 +109,6 @@ use App\Views\Flash;
                 <span class="circle">
                     <img src="../static/images/X.png" alt="X">
                 </span>
-                <span class="circle">
-                    <img src="instagram-icon.png" alt="Instagram">
-                </span>
-                <span class="circle">
-                    <img src="instagram-icon.png" alt="Instagram">
-                </span>
             </div>
         </div>
     </footer>
