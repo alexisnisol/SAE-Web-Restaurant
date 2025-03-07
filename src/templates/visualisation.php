@@ -58,6 +58,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
                 if (! empty($restaurant['phone'])) {
                     echo "<p><strong>Tel : </strong>📞 " . $restaurant['phone'] . "</p>";
                 }
+                $moyenne = Avis::moyenneRestaurant($restaurant['id_restaurant']);
+                if (!empty($moyenne)) {
+                    $fullStars = floor($moyenne);
+                    $halfStar = ($moyenne - $fullStars) >= 0.5 ? 1 : 0;
+                    $emptyStars = 5 - $fullStars - $halfStar;
+                
+                    echo "<p><strong>Note Moyenne : </strong>";
+                    for ($i = 0; $i < $fullStars; $i++) {
+                        echo "⭐";
+                    }
+                    if ($halfStar) {
+                        echo "⭐️"; // Utilisez une icône ou une image pour la demi-étoile
+                    }
+                    for ($i = 0; $i < $emptyStars; $i++) {
+                        echo "☆";
+                    }
+                    echo "</p>";
+                }
                 if (! empty($restaurant['wheelchair']) || ! empty($restaurant['vegetarian']) || ! empty($restaurant['vegan']) || ! empty($restaurant['delivery']) || ! empty($restaurant['takeaway']) || ! empty($restaurant['internet_access']) || ! empty($restaurant['drive_through'])) {
                     echo "<div class='cuisines'><p><strong>Services : </strong></p><ul>";
                     if (! empty($restaurant['wheelchair'])) {

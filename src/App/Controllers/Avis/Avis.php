@@ -44,5 +44,13 @@ class Avis {
             $query->execute();
         }
     }
+
+    static function moyenneRestaurant($idRestau) {
+        $query = App::getApp()->getDB()->prepare('SELECT AVG(etoile) as moyenne FROM AVIS WHERE id_restaurant = :id');
+        $query->bindParam(':id', $idRestau);
+        $query->execute();
+        $result = $query->fetch();
+        return $result['moyenne'];
+    }
 }
 
