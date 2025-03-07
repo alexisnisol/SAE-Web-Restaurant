@@ -69,5 +69,19 @@ class Avis {
         $query->execute();
         return $query->fetch();
     }
+
+    static function getLastGoodAvis() {
+        $query = App::getApp()->getDB()->query(
+            'SELECT a.id_avis, a.etoile, a.avis, a.date_avis, 
+                    u.nom AS user_nom, u.prenom AS user_prenom 
+             FROM AVIS a
+             JOIN UTILISATEUR u ON a.id_utilisateur = u.id_utilisateur
+             WHERE a.etoile >= 4
+             ORDER BY a.date_avis DESC
+             LIMIT 1'
+        );
+        return $query->fetch();
+    }
+    
 }
 

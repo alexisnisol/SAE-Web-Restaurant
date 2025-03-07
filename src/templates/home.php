@@ -2,9 +2,11 @@
 
 use App\Controllers\Carousel\RestauCarousel;
 use App\Controllers\Restaurant\Restaurant;
+use App\Controllers\Avis\Avis;
 
 $restaurants = Restaurant::getRestaurantsNTType();
 $types = Restaurant::getTypes();
+$dernierAvis = Avis::getLastGoodAvis();
 ?>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -46,35 +48,35 @@ echo $carousel->render();
 ?>
 
 <div class="avis-container">
-    <div class="avis-section">
-        <div class="avis-contenu">
-            <h1>Donnez-nous votre avis !</h1>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <p class="dernier-avis">Dernier avis le : 20/01/25</p>
-            <div class="avis">
-                <p><strong>Stéphane ROBERT :</strong> 
-                    <span class="stars-small">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </span>
-                </p>
-                <div class="avis-message">
-                    Super site ! J’adore, je le recommande à tous ceux qui ont faim !
+        <div class="avis-section">
+            <div class="avis-contenu">
+                <h1>Donnez-nous votre avis !</h1>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
                 </div>
+                <p class="dernier-avis">Dernier avis le : <?php echo $dernierAvis['date_avis'] ?? 'Aucun avis'; ?></p>
+                <div class="avis">
+                    <p><strong><?php echo $dernierAvis['user_nom'] ?? 'Utilisateur inconnu'; ?> :</strong> 
+                        <span class="stars-small">
+                            <?php
+                            for ($i = 0; $i < ($dernierAvis['etoile'] ?? 0); $i++) {
+                                echo '<i class="fas fa-star"></i>';
+                            }
+                            ?>
+                        </span>
+                    </p>
+                    <div class="avis-message">
+                        <?php echo $dernierAvis['avis'] ?? 'Pas de commentaire disponible.'; ?>
+                    </div>
+                </div>
+                <button class="avis-btn" onclick="window.location.href='./index.php?action=avis'">Voir mes avis</button>
             </div>
-            <button class="avis-btn">Écrire un avis</button>
-        </div>
-        <div class="image-container">
-            <img src="../static/images/femme.png" alt="Personne souriante">
+            <div class="image-container">
+                <img src="../static/images/femme.png" alt="Personne souriante">
+            </div>
         </div>
     </div>
-</div>
