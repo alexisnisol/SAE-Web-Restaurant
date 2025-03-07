@@ -15,7 +15,7 @@ use App;
 class DatabaseTest extends TestCase {
 
     protected function setUp(): void {
-        $db = App::getApp()->setDB('src/static/data/database.db');
+        App::getApp()->setDB('src/static/data/database.db');
     }
 
     public function testGetDB() {
@@ -29,9 +29,7 @@ class DatabaseTest extends TestCase {
         $this->assertNotNull($pdo);
     }
     
-    public function testDatabaseQuery()
-    {
-        // $db = new SQLiteDatabase('src/static/data/database.db');
+    public function testDatabaseQuery() {
         $db = App::getApp()->getDB();
         $result = $db->query('SELECT 1');
         $this->assertNotFalse($result);

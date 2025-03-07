@@ -9,7 +9,7 @@ use App;
 class AvisTest extends TestCase {
 
     protected function setUp(): void {
-        App::getApp(); 
+        App::getApp()->setDB('src/static/data/database.db');
     }
     
     public function testInsertAvis() {
