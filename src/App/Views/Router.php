@@ -64,7 +64,7 @@ class Router
                 self::render('visualisation.php', 'Visualisation', ['visualisation.css']);
                 break;
             case 'avis':
-                self::render('avis.php', 'Vos avis', ['avis.css']);
+                self::render('avis.php', 'Vos avis', ['avis.css', 'visualisation.css']);
                 break;
             case 'a-propos':
                 self::render('a-propos.php', 'À propos', ['a-propos.css']);
@@ -93,7 +93,7 @@ class Router
                 break;
             case 'avisModo':
                 Auth::checkUserAdmin();
-                self::render('avisModo.php', 'Avis Modérateur', ['avis.css']);
+                self::render('avisModo.php', 'Avis Modérateur', ['avis.css', 'visualisation.css']);
                 break;
             default:
                 self::render('404.php', 'Page introuvable', ['404.css']);
