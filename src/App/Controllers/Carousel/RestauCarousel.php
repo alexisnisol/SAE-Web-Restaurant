@@ -76,7 +76,6 @@ class RestauCarousel {
                 $filledStars = round($moyAvis['moy']);
                 $emptyStars = 5 - $filledStars;
 
-                // Génération des étoiles
                 $starsHtml = str_repeat('<span class="star filled">★</span>', $filledStars) .
                              str_repeat('<span class="star empty">☆</span>', $emptyStars);
             } else {
@@ -91,7 +90,6 @@ class RestauCarousel {
                                     <p>' . htmlspecialchars($restaurant['type']) . '</p>
                                     <p>' . htmlspecialchars($restaurant['commune']) . '</p>
                                     <p>' . htmlspecialchars($restaurant['phone']) . '</p>
-                                    <p>' . htmlspecialchars($restaurant['opening_hours']) . '</p>
                                     <div class="restaurant-rating">' . $starsHtml . '</div>
                                 </div>
                             </div>
@@ -126,7 +124,6 @@ class RestauCarousel {
                                     <p>' . htmlspecialchars($restaurant['type']) . '</p>
                                     <p>' . htmlspecialchars($restaurant['commune']) . '</p>
                                     <p>' . htmlspecialchars($restaurant['phone']) . '</p>
-                                    <p>' . htmlspecialchars($restaurant['opening_hours']) . '</p>
                                     <div class="restaurant-rating">' . $starsHtml . '</div>
                                 </div>
                             </div>
@@ -152,7 +149,6 @@ class RestauCarousel {
                                         <p>' . htmlspecialchars($restaurant['type']) . '</p>
                                         <p>' . htmlspecialchars($restaurant['commune']) . '</p>
                                         <p>' . htmlspecialchars($restaurant['phone']) . '</p>
-                                        <p>' . htmlspecialchars($restaurant['opening_hours']) . '</p>
                                     </div>
                                 </div>
                             </a>';
