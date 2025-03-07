@@ -6,14 +6,27 @@ Ce projet est une application web permettant aux utilisateurs de rechercher des 
 
 ## Fonctionnalités
 
-- 🔍 **Recherche de restaurants** : Trouvez des restaurants selon différents critères (nom, type de cuisine, localisation...).
-- ⭐ **Avis et notes** : Les utilisateurs peuvent laisser des avis et noter les restaurants.
-- 🧑‍💻 **Système d'authentification** : Inscription, connexion et gestion de profil.
-- ❤️ **Favoris et préférences** : Les utilisateurs peuvent aimer des restaurants et des types de cuisine.
-- 🏪 **Gestion des restaurants** : Ajout et modification des informations des restaurants (pour les administrateurs).
-- 📊 **Interface administrateur** : Modération des avis et gestion des utilisateurs.
-- 📸 **Carrousel d’images** : Affichage des images des restaurants sur la page d’accueil.
-- 🗺️ **Intégration de cartes** : Visualisation des restaurants sur une carte interactive.
+### Fonctionnalités Obligatoires :
+- 🔍 **Module de recherche** : Trouvez facilement un restaurant selon son nom, sa localisation ou son type de cuisine.
+- 🔑 **Inscription/Connexion** : Création et connexion des utilisateurs via un système sécurisé avec gestion des sessions.
+- 🏪 **Visualisation des caractéristiques des restaurants** : Consultez les détails d’un restaurant (nom, type de cuisine, adresse, etc.).
+- ⭐ **Avis et critiques** : Laissez des avis et notes sur les restaurants.
+- ✍️ **Administrer ses critiques** : Modifiez ou supprimez vos avis.
+- 🏠 **Accéder à son profil** : Visualisez et gérez vos informations personnelles.
+- ✅ **Tests & couverture** : Assurer un pourcentage de couverture des tests.
+- 📐 **Architecture MVC** : Organisation claire et pratique du code avec MVC, PDO, Sessions et un Autoloader.
+
+### Fonctionnalités Souhaitées :
+- 👨‍💼 **Partie Administrateur & Modérateur** : Gestion des utilisateurs, modération des avis et validation des ajouts.
+- 🏡 **Écran d’accueil** : Présentation attrayante de l’application avec les fonctionnalités principales.
+- 🎠 **Carrousel d’images** : Mise en avant des restaurants via un slider dynamique.
+- 🍽️ **Types de cuisine préférés** : Possibilité de sauvegarder ses préférences culinaires.
+- ❤️ **Restaurants favoris** : Ajout et gestion d’une liste de restaurants préférés.
+
+### Fonctionnalités Optionnelles :
+- 🗺️ **Carte des restaurants** : Visualisation des restaurants sur une carte interactive.
+- ✏️ **Modification du profil** : Changer ses informations personnelles (nom, email, mot de passe...).
+- ℹ️ **Page "À Propos"** : Informations sur le site Taste&Tell.
 
 ## Structure du Projet
 
