@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Initialisation de la carte et centrage sur la France
     const France = {pos: [46.903354, 1.888334], zoom: 5};
-    const Orléans = {pos: [47.902964, 1.909251], zoom: 13};
+    const Orléans = {pos: [47.880999, 1.909251], zoom: 12};
     let view = addresses.length > 1 ? Orléans : France;
     var map = L.map('map').setView(view.pos, view.zoom); 
 

@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
 ?>
 <div class="container">
     <div class="restaurant-header">
-        <img src="./static/images/plat-carousel<?php echo $imageIndex = rand(1, 6) ?>.jpeg" alt="Image du restaurant">
+        <img src="<?php echo Restaurant::getRestaurantImage($restaurant['name']) ?>" alt="Image du restaurant <?php echo $restaurant['name'] ?>">
         <div class="restaurant-info">
         <?php
             $userId = Auth::getCurrentUser()->id;
@@ -97,6 +97,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && Auth::isUserLoggedIn()) {
                 }
                 if (! empty($restaurant['phone'])) {
                     echo "<p><strong>Tel : </strong>📞 " . $restaurant['phone'] . "</p>";
+                }
+                $moyenne = Avis::getMoyAvisRestau($restaurant['id_restaurant'])['moy'];
+                if (!empty($moyenne)) {
+                    $fullStars = floor($moyenne);
+                    $halfStar = ($moyenne - $fullStars) >= 0.5 ? 1 : 0;
+                    $emptyStars = 5 - $fullStars - $halfStar;
+                
+                    echo "<p><strong>Note Moyenne : </strong>";
+                    for ($i = 0; $i < $fullStars; $i++) {
+                        echo "⭐";
+                    }
+                    if ($halfStar) {
+                        echo "⭐️"; // Utilisez une icône ou une image pour la demi-étoile
+                    }
+                    for ($i = 0; $i < $emptyStars; $i++) {
+                        echo "☆";
+                    }
+                    echo "</p>";
                 }
                 if (! empty($restaurant['wheelchair']) || ! empty($restaurant['vegetarian']) || ! empty($restaurant['vegan']) || ! empty($restaurant['delivery']) || ! empty($restaurant['takeaway']) || ! empty($restaurant['internet_access']) || ! empty($restaurant['drive_through'])) {
                     echo "<div class='cuisines'><p><strong>Services : </strong></p><ul>";

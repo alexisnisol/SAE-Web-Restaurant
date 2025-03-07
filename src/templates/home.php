@@ -3,7 +3,7 @@
 use App\Controllers\Carousel\RestauCarousel;
 use App\Controllers\Restaurant\Restaurant;
 
-$restaurants = Restaurant::getRestaurantsNTType();
+$restaurants = Restaurant::getRestaurantsNJType();
 $types = Restaurant::getTypes();
 ?>
 
