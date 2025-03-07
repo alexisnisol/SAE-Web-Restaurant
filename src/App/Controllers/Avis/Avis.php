@@ -36,7 +36,8 @@ class Avis {
              FROM AVIS a
              JOIN RESTAURANT r ON a.id_restaurant = r.id_restaurant
              JOIN UTILISATEUR u ON a.id_utilisateur = u.id_utilisateur
-             WHERE a.id_utilisateur = :userId'
+             WHERE a.id_utilisateur = :userId
+             ORDER BY a.date_avis DESC'
         );
         
         $query->bindParam(':userId', $userId);
@@ -50,7 +51,8 @@ class Avis {
                     r.name AS restaurant_name, u.nom AS user_nom, u.prenom AS user_prenom 
              FROM AVIS a
              JOIN RESTAURANT r ON a.id_restaurant = r.id_restaurant
-             JOIN UTILISATEUR u ON a.id_utilisateur = u.id_utilisateur'
+             JOIN UTILISATEUR u ON a.id_utilisateur = u.id_utilisateur
+             ORDER BY a.date_avis DESC'
         );
         return $query->fetchAll();
     }
