@@ -31,7 +31,10 @@ use App\Views\Flash;
             <div class="nav-center">
                 <ul class="nav-links">
                     <li><a href="./index.php">Découvrir</a></li>
+
+                <?php if (Auth::isUserLoggedIn()) : ?>
                     <li><a href="./index.php?action=avis">Vos Avis</a></li>
+                <?php endif; ?>
                     <li><a href="./index.php?action=carte">Carte</a></li>
                     <li><a href="./index.php?action=a-propos">Plus</a></li>
                 </ul>
