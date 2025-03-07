@@ -152,22 +152,32 @@ a {
 
 .carousel-btn {
     position: absolute;
-    background-color: rgb(42, 157, 143);
-    color: white;
-    border: medium;
-    font-size: 1rem;
-    padding: 1vw;
+    background-color: rgba(42, 157, 143, 0.5); /* Opacité faible */
+    color: black; /* Flèche noire */
+    border: none;
+    font-size: 1.5rem; /* Agrandit la flèche */
+    padding: 1.2vw;
     border-radius: 50%;
     cursor: pointer;
     z-index: 10;
     top: 50%;
     transform: translateY(-50%);
     transition: 0.3s;
-    height: 14%;
-  }
-  .star {
-    font-size: 20px;
-    color: #ccc; 
+    height: auto;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-btn:hover {
+    background-color: rgba(42, 157, 143, 0.7);
+}
+
+
+.star {
+font-size: 20px;
+color: #ccc; 
 }
 
 .star.filled {
