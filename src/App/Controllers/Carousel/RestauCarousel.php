@@ -137,10 +137,9 @@ class RestauCarousel {
     private function generateLikedRestaurantItems($userId) {
         $itemsHtml = '';
         $likedRestaurants = LikeRestaurant::getRestaurantsAimes($userId);
-        $url = Restaurant::getRestaurantImage($restaurant['name']); 
         if (!empty($likedRestaurants)) {
             foreach ($likedRestaurants as $restaurant) {
-
+                $url = Restaurant::getRestaurantImage($restaurant['name']); 
                 $moyAvis = Avis::getMoyAvisRestau($restaurant['id_restaurant']);
     
                 if ($moyAvis['moy'] !== null) {

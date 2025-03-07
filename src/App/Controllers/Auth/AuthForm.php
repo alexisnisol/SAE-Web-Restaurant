@@ -72,6 +72,7 @@ class AuthForm {
                 $user->password = $password;
                 $user->hashPassword();
             }
+            print_r($user);
             $user->updateDatabase();
 
             //redirect to login page

@@ -52,11 +52,11 @@ class User {
     public function updateDatabase() {
         $query = App::getApp()->getDB()->prepare(
             'UPDATE UTILISATEUR 
-            SET nom = :nom, 
-                prenom = :prenom,
-                email = :email, 
-                mdp = :mdp, 
-            WHERE id_utilisateur = :id_utilisateur'
+             SET nom = :nom, 
+                 prenom = :prenom,
+                 email = :email, 
+                 mdp = :mdp
+             WHERE id_utilisateur = :id_utilisateur'
         );
     
         $query->execute(array(
@@ -67,6 +67,6 @@ class User {
             ':id_utilisateur' => $this->id
         ));
     }
-}
+}    
 
 ?>
