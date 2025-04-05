@@ -46,20 +46,20 @@ Taste&Tell Mobile est une application mobile (développée avec Flutter) qui per
 
 La structure du projet est organisée comme suit :
 
-lib/
-├── components/
-│   ├── auth/
-│   ├── form/
-│   ├── Restaurant/
-│   └── router/
-├── models/
-│   ├── database/
-│   ├── helper/
-│   └── viewmodels/
-├── repository/
-└── widgets/
-    ├── auth/
-    └── profil/
+#### **lib/**
+- #### **components/**
+  - #### **auth/**
+  - #### **form/**
+  - #### **Restaurant/**
+  - #### **router/**
+- #### **models/**
+  - #### **database/**
+  - #### **helper/**
+  - #### **viewmodels/**
+- #### **repository/**
+- #### **widgets/**
+  - #### **auth/**
+  - #### **profil/**
 
 Auteurs
 Alexis NISOL
